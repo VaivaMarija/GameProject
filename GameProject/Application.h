@@ -2,6 +2,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/String.hpp>
 #include "Enemy.h"
+#include "Player.h"
 
 class CApplication
 {
@@ -10,7 +11,7 @@ public:
 	~CApplication();
 
 	void Run();
-	
+	player Player;
 	enemy Enemy;
 	enemy Enemy2;
 
