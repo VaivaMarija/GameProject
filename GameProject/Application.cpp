@@ -18,6 +18,12 @@ void CApplication::Run()
 {
 	sf::Event e;
 
+	Enemy.Load();
+	Enemy.setEnemyPos(sf::Vector2f(100, 80));
+
+	Enemy2.Load();
+	Enemy2.setEnemyPos(sf::Vector2f(200, 160));
+
 	while (_running)
 	{
 		while (_window.pollEvent(e))
@@ -26,8 +32,11 @@ void CApplication::Run()
 		}
 
 		_window.clear(sf::Color::Blue);
-
+		Enemy.Tick();
+		Enemy2.Tick();
 		// Todo: Add your game code!
+		Enemy.renderTo(_window);
+		Enemy2.renderTo(_window);
 
 		_window.display();
 	}
