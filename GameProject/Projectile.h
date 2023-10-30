@@ -30,6 +30,8 @@ public:
 
 	// Projectile sprite
 	sf::Sprite sprite;
+	void Tick(/*float speed, sf::Vector2f direction*/);
+
 protected:
 	// Projectile texture
 	sf::Texture texture;
@@ -39,9 +41,13 @@ private:
 	void SetTexture();
 
 	// projectile direction
-	float direction;
+	sf::Vector2f direction;
+
 	// projectile speed
 	float speed;
+
+
+
 
 	// projectile damage
 	float damage;

@@ -37,12 +37,13 @@ void CApplication::Run()
 		_window.clear(sf::Color::Blue);
 		Enemy.Tick();
 		Enemy2.Tick();
+
 		// Todo: Add your game code!
 		Enemy.renderTo(_window);
 		Enemy2.renderTo(_window);
 
 		
-
+		Projectile.Tick();
 		// drawing a projectile to window
 		_window.draw(Projectile.sprite);
 
