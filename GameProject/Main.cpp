@@ -24,7 +24,3 @@ int main()
 	application.Run();
 	return 0;
 }
-
-
-
-// HELLOOOO THIS IS A TEST!!!
