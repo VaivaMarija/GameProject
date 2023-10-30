@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/String.hpp>
+#include "Enemy.h"
 #include "Projectile.h"
-
 
 class CApplication
 {
@@ -11,6 +11,9 @@ public:
 	~CApplication();
 
 	void Run();
+	
+	enemy Enemy;
+	enemy Enemy2;
 
 private:
 	void ProcessWindowEvent(const sf::Event& e);
