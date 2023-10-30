@@ -8,6 +8,9 @@ CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWid
 	vm.height = windowHeight;
 	vm.width = windowWidth;
 	_window.create(vm, windowTitle);
+
+	// spawning a projectile at the center of the window ( move to player later)
+	Projectile.SpawnProjectile({ static_cast<float>(windowWidth) / 2, static_cast<float>(windowHeight) / 2 });
 }
 
 CApplication::~CApplication()
@@ -28,6 +31,11 @@ void CApplication::Run()
 		_window.clear(sf::Color::Blue);
 
 		// Todo: Add your game code!
+		
+
+		// drawing a projectile to window
+		_window.draw(Projectile.sprite);
+
 
 		_window.display();
 	}
