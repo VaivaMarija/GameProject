@@ -17,12 +17,13 @@ CApplication::~CApplication()
 void CApplication::Run()
 {
 	sf::Event e;
-
-	Enemy.Load();
-	Enemy.setEnemyPos(sf::Vector2f(100, 80));
-
-	Enemy2.Load();
-	Enemy2.setEnemyPos(sf::Vector2f(200, 160));
+	Enemies.reserve(10);
+	//enemies
+	SpawnEnemy(sf::Vector2f(200, 80));
+	SpawnEnemy(sf::Vector2f(x, y));
+	SpawnEnemy(sf::Vector2f(x, y));
+	SpawnEnemy(sf::Vector2f(x, y));
+	SpawnEnemy(sf::Vector2f(x, y));
 
 	while (_running)
 	{
@@ -32,12 +33,14 @@ void CApplication::Run()
 		}
 
 		_window.clear(sf::Color::Blue);
-		Enemy.Tick();
-		Enemy2.Tick();
+		
 		// Todo: Add your game code!
-		Enemy.renderTo(_window);
-		Enemy2.renderTo(_window);
-
+		
+		for(enemy& e:Enemies)
+		{
+			e.Tick();
+			e.renderTo(_window);
+		}
 		_window.display();
 	}
 }
@@ -48,4 +51,14 @@ void CApplication::ProcessWindowEvent(const sf::Event& e)
 	{
 		_running = false;
 	}
+}
+
+//spawns enemy at "random" location
+void CApplication::SpawnEnemy(sf::Vector2f atPosition)
+{
+	enemy& enemyRef = Enemies.emplace_back();
+	enemyRef.Load();
+	enemyRef.setEnemyPos(atPosition);
+	x = (rand() % 1200) + 100;
+	y = (rand() % 300) + 100;
 }

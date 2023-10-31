@@ -18,5 +18,24 @@ void enemy::Load()
 
 void enemy::Tick()
 {
-	sprite.move(0, 0.8);
+	sprite.move(0, 0.5);
+
+	if (sprite.getPosition().y > 950)
+	{
+		setEnemyPos(sf::Vector2f(sprite.getPosition().x, 0));
+	}
+
+	//death when health is 0
+	//if (health <= 0)
+	//{
+		//Destroy GameObject.Enemy;
+	//}
 }
+
+
+
+
+//health 
+//
+//damage collision with projectile
+// 
