@@ -361,3 +361,4 @@ FodyWeavers.xsd
 # Ignore the .exe that we build and its debugging files
 Bin/*.exe
 Bin/*.pdb
+/Intermediate/Debugx64

@@ -12,6 +12,9 @@ public:
 	void Load();
 	void Tick();
 
+	int health = 50;
+	void Death();
+
 private:
 	sf::Texture texture;
 	sf::Sprite sprite;
