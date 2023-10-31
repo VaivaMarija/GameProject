@@ -20,7 +20,7 @@ void player::Load()
 	//set sprite origin to be in the centre of itself, so it rotates on the centre
 	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 	
-	setHealthPoints(3);
+	healthPoints = 30;
 }
 
 void player::ReadKeyboardInput()
@@ -36,19 +36,39 @@ void player::ReadKeyboardInput()
 	LMBDown = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 }
 
-float player::getHealthPoints()
+int player::getHealthPoints()
 {
 	return healthPoints;
 }
 
-void player::setHealthPoints(float _newHealthPoints)
+void player::decreaseHealth()
 {
-	healthPoints = _newHealthPoints;
+	healthPoints = healthPoints - 10;
+}
+
+void player::resetHealth()
+{
+	healthPoints = 30;
 }
 
 bool player::checkForDeath()
 {
 	return healthPoints = 0;
+}
+
+int player::getScore()
+{
+	return score;
+}
+
+void player::addScore(int _scoreToAdd)
+{
+	score = score + 10;
+}
+
+void player::resetScore()
+{
+	score = 0;
 }
 
 void player::Tick(float _deltaTime)
@@ -70,14 +90,14 @@ void player::Tick(float _deltaTime)
 	if(aIsDown)
 	{
 		//rotate player left
-		sprite.rotate(-120.0 * _deltaTime);
+		sprite.rotate(-150.0 * _deltaTime);
 	}
 	if (dIsDown)
 	{
 		//rotate player left
-		sprite.rotate(120.0f * _deltaTime);
+		sprite.rotate(150.0f * _deltaTime);
 	}
-
+	
 }
 
 

@@ -34,6 +34,15 @@ void CApplication::Run()
 	Enemy2.Load();
 	Enemy2.setEnemyPos(sf::Vector2f(200, 160));
 
+	sf::Text pointsText;
+	sf::Font font;
+	if (!font.loadFromFile("Content/Fonts/TextFont.ttf"))
+	{
+		//error
+	}
+	//set font
+	pointsText.setFont(font);
+
 	while (_running)
 	{
 		sf::Time elapsed = clock.restart();
@@ -43,7 +52,7 @@ void CApplication::Run()
 			ProcessWindowEvent(e);
 		}
 
-		_window.clear(sf::Color::Blue);
+		_window.clear(sf::Color::Black);
 	
 		Player.Tick(deltaTime);
 		Enemy.Tick();
@@ -53,7 +62,14 @@ void CApplication::Run()
 		Player.renderTo(_window);
 		Enemy.renderTo(_window);
 		Enemy2.renderTo(_window);
-
+		
+		//set string to display
+		pointsText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
+		//set character size, pixels not points
+		pointsText.setCharacterSize(24);
+		//set colour
+		pointsText.setFillColor(sf::Color::White);
+		_window.draw(pointsText);
 		
 		Projectile.Tick();
 		// drawing a projectile to window

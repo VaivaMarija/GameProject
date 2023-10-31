@@ -11,9 +11,13 @@ public:
 	void Load();
 	void Tick(float);
 	void ReadKeyboardInput();
-	float getHealthPoints();
-	void setHealthPoints(float _newHealthPoints);
+	int getHealthPoints();
+	void decreaseHealth();
+	void resetHealth();
 	bool checkForDeath();
+	int getScore();
+	void addScore(int _scoreToAdd);
+	void resetScore();
 
 	bool wIsDown;
 	bool aIsDown;
@@ -22,5 +26,6 @@ public:
 private:
 	sf::Texture texture;
 	sf::Sprite sprite;
-	float healthPoints;
+	int healthPoints;
+	int score;
 };
