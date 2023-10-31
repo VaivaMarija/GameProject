@@ -25,7 +25,7 @@ private:
 	// Projectile object to be able to spawn a projectile - move to player later
 	CProjectile Projectile;
 
-
-
 	// delta time function
+
+
 };
