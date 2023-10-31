@@ -1,5 +1,6 @@
 #include "player.h"
 #include "Math.h"
+#include "Application.h"
 
 void player::renderTo(sf::RenderWindow& window)
 {
@@ -30,6 +31,8 @@ void player::ReadKeyboardInput()
 	wIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W);
 	aIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A);
 	dIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D);
+
+	spaceIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space);
 
 	//use sf::Mouse to check for mouse input
 	// sf::Mouse:: enum containing all buttons
@@ -97,7 +100,22 @@ void player::Tick(float _deltaTime)
 		//rotate player left
 		sprite.rotate(150.0f * _deltaTime);
 	}
-	
+	if (spaceIsDown)
+	{
+		//shoot projectile
+		CProjectile* projectile = new CProjectile;
+		projectile->setPosition(getPlayerPosition());
+		application->addGameObject(projectile);
+	}
+
 }
 
+sf::Vector2f player::getPlayerPosition() const
+{
+	return sprite.getPosition();
+}
 
+void player::setApplication(CApplication* _application)
+{
+	application = _application;
+}

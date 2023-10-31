@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "TextureBank.h"
 #include <SFML/Window/Event.hpp>
 
 CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWidth, unsigned int windowHeight)
@@ -8,11 +9,6 @@ CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWid
 	vm.height = windowHeight;
 	vm.width = windowWidth;
 	_window.create(vm, windowTitle);
-
-	// set projectile type
-	//Projectile.SetType(Player);
-	// spawning a projectile at the center of the window ( move to player later)
-	Projectile.SpawnProjectile({ static_cast<float>(windowWidth) / 2, static_cast<float>(windowHeight) / 2 });
 }
 
 CApplication::~CApplication()
@@ -25,14 +21,23 @@ void CApplication::Run()
 	
 
 	sf::Event e;
+	Player.setApplication(this);
 	Player.Load();
 	Player.setPlayerPos(sf::Vector2f(800, 450));
+	Enemies.reserve(10);
+	//enemies
+	SpawnEnemy(sf::Vector2f(200, 80));
+	SpawnEnemy(sf::Vector2f(x, y));
+	SpawnEnemy(sf::Vector2f(x, y));
+	SpawnEnemy(sf::Vector2f(x, y));
+	SpawnEnemy(sf::Vector2f(x, y));
 
-	Enemy.Load();
-	Enemy.setEnemyPos(sf::Vector2f(100, 80));
 
-	Enemy2.Load();
-	Enemy2.setEnemyPos(sf::Vector2f(200, 160));
+	// projectile
+	TextureBank::loadAllTextures();
+	CProjectile projectile;
+	projectile.setPosition(Player.getPlayerPosition());
+	addGameObject(&projectile);
 
 	sf::Text pointsText;
 	sf::Font font;
@@ -45,6 +50,7 @@ void CApplication::Run()
 
 	while (_running)
 	{
+		// deltaTime
 		sf::Time elapsed = clock.restart();
 		float deltaTime = elapsed.asSeconds();
 		while (_window.pollEvent(e))
@@ -54,15 +60,10 @@ void CApplication::Run()
 
 		_window.clear(sf::Color::Black);
 	
-		Player.Tick(deltaTime);
-		Enemy.Tick();
-		Enemy2.Tick();
+		Player.Tick(deltaTime);		
 
 		// Todo: Add your game code!
-		Player.renderTo(_window);
-		Enemy.renderTo(_window);
-		Enemy2.renderTo(_window);
-		
+
 		//set string to display
 		pointsText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
 		//set character size, pixels not points
@@ -74,8 +75,20 @@ void CApplication::Run()
 		Projectile.Tick();
 		// drawing a projectile to window
 		_window.draw(Projectile.sprite);
+		
 
+		for (CGameObject* currentObject : gameObjects)
+		{
+			currentObject->Tick(deltaTime);
+			currentObject->drawTo(_window);
+		}
 
+		
+		for(enemy& e:Enemies)
+		{
+			e.Tick();
+			e.renderTo(_window);
+		}
 		_window.display();
 	}
 }
@@ -87,3 +100,19 @@ void CApplication::ProcessWindowEvent(const sf::Event& e)
 		_running = false;
 	}
 }
+
+//spawns enemy at "random" location
+void CApplication::SpawnEnemy(sf::Vector2f atPosition)
+{
+	enemy& enemyRef = Enemies.emplace_back();
+	enemyRef.Load();
+	enemyRef.setEnemyPos(atPosition);
+	x = (rand() % 1200) + 100;
+	y = (rand() % 300) + 100;
+}
+
+void CApplication::addGameObject(CGameObject* _gameObject)
+{
+	gameObjects.push_back(_gameObject);
+}
+
