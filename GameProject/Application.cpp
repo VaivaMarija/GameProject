@@ -61,7 +61,7 @@ void CApplication::Run()
 		_window.clear(sf::Color::Black);
 	
 		Player.Tick(deltaTime);		
-
+		Player.renderTo(_window);
 		// Todo: Add your game code!
 
 		//set string to display
@@ -72,9 +72,7 @@ void CApplication::Run()
 		pointsText.setFillColor(sf::Color::White);
 		_window.draw(pointsText);
 		
-		Projectile.Tick();
-		// drawing a projectile to window
-		_window.draw(Projectile.sprite);
+
 		
 
 		for (CGameObject* currentObject : gameObjects)
