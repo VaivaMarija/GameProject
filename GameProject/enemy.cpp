@@ -7,7 +7,7 @@ void enemy::renderTo(sf::RenderWindow& window)
 
 void enemy::setEnemyPos(sf::Vector2f newPos)
 {
-	sprite.setPosition(newPos);	
+	sprite.setPosition(newPos);
 }
 
 void enemy::Load()

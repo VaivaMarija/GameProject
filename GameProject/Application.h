@@ -3,6 +3,8 @@
 #include <SFML/System/String.hpp>
 #include <vector>
 #include "Enemy.h"
+#include "Projectile.h"
+#include "Player.h"
 
 class CApplication
 {
@@ -11,6 +13,8 @@ public:
 	~CApplication();
 
 	void Run();
+	player Player;
+	
 	
 	std::vector<enemy>Enemies;
 
@@ -22,4 +26,11 @@ private:
 	int y;
 	sf::RenderWindow _window;
 	bool _running;
+
+	// Projectile object to be able to spawn a projectile - move to player later
+	CProjectile Projectile;
+
+	// delta time function
+
+
 };
