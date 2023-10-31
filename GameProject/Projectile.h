@@ -4,17 +4,16 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-// create projectile to spawn
-// spawn projectile at (player - from player class) location
-// move projectile to a direction
+// create projectile to spawn	-DONE
+// spawn projectile at (player - from player class) location	-DONE(ish)
+// move projectile to a direction	-Done(ish)
 // ( get player face direction )
 // ( move projectile from player direction )
 
 // projectile types (for power-ups)
 
-// how about just a bunch of projectile types in one class
-// and then player/enemy/power-up/etc will select which one to spawn when?
 
+enum EProjectileType {Player, Enemy, PowerUp};
 
 
 // Base projectile class
@@ -23,13 +22,18 @@ class CProjectile
 public:
 	CProjectile();
 
+
+	// get projectile type
+	EProjectileType projectileType;
+
 	// Spawn at location
 	void SpawnProjectile(sf::Vector2f location);
 
-	// get projectile
+	void SetType(EProjectileType Type);
 
 	// Projectile sprite
 	sf::Sprite sprite;
+
 	void Tick(/*float speed, sf::Vector2f direction*/);
 
 protected:
@@ -45,8 +49,6 @@ private:
 
 	// projectile speed
 	float speed;
-
-
 
 
 	// projectile damage
