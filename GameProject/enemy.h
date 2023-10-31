@@ -13,7 +13,7 @@ public:
 	void Tick();
 
 private:
-	sf::Texture  texture;
+	sf::Texture texture;
 	sf::Sprite sprite;
 };
 

@@ -1,4 +1,6 @@
 #include "player.h"
+#include "Math.h"
+#include "Application.h"
 
 void player::renderTo(sf::RenderWindow& window)
 {
@@ -12,8 +14,14 @@ void player::setPlayerPos(sf::Vector2f newPos)
 
 void player::Load() 
 {
+	//load texture
 	texture.loadFromFile("Content/Textures/Player/playerShip1_blue.png");
+	//add texture to sprite
 	sprite.setTexture(texture);
+	//set sprite origin to be in the centre of itself, so it rotates on the centre
+	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
+	
+	setHealthPoints(3);
 }
 
 void player::ReadKeyboardInput()
@@ -31,28 +39,53 @@ void player::ReadKeyboardInput()
 	LMBDown = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 }
 
-void player::Tick()
+float player::getHealthPoints()
+{
+	return healthPoints;
+}
+
+void player::setHealthPoints(float _newHealthPoints)
+{
+	healthPoints = _newHealthPoints;
+}
+
+bool player::checkForDeath()
+{
+	return healthPoints = 0;
+}
+
+void player::Tick(float _deltaTime)
 {
 	ReadKeyboardInput();
+	float RotAsRad = math::DegToRad(sprite.getRotation());
 	if(wIsDown)
 	{
 		//move player forward
-		sprite.move(0, 0.1);
+		//create vector2
+		sf::Vector2f movement(sin(RotAsRad), cos(RotAsRad) * -1);
+		movement *= 180.0f;
+		sf::Vector2f scaledMovement = movement * _deltaTime;
+		if (true)
+		{
+			sprite.move(scaledMovement);
+		}
 	}
 	if(aIsDown)
 	{
 		//rotate player left
-		sprite.rotate(0.1f);
+		sprite.rotate(-120.0f * _deltaTime);
 	}
 	if (dIsDown)
 	{
 		//rotate player left
-		sprite.rotate(0.1f);
+		sprite.rotate(120.0f * _deltaTime);
 	}
 	if (spaceIsDown)
 	{
 		//shoot projectile
-		//Projectile.sprite.move(0, -1.0f);
+		CProjectile* projectile = new CProjectile;
+		projectile->setPosition(getPlayerPosition());
+		application->addGameObject(projectile);
 	}
 
 }
@@ -60,4 +93,9 @@ void player::Tick()
 sf::Vector2f player::getPlayerPosition() const
 {
 	return sprite.getPosition();
+}
+
+void player::setApplication(CApplication* _application)
+{
+	application = _application;
 }

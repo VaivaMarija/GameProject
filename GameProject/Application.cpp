@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "TextureBank.h"
 #include <SFML/Window/Event.hpp>
 
 CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWidth, unsigned int windowHeight)
@@ -8,7 +9,6 @@ CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWid
 	vm.height = windowHeight;
 	vm.width = windowWidth;
 	_window.create(vm, windowTitle);
-
 }
 
 CApplication::~CApplication()
@@ -17,29 +17,40 @@ CApplication::~CApplication()
 
 void CApplication::Run()
 {
+	sf::Clock clock;
+	
+
 	sf::Event e;
+	Player.setApplication(this);
 	Player.Load();
 	Player.setPlayerPos(sf::Vector2f(800, 450));
-
-	// spawning a projectile at the center of the window ( move to player later)
-	Projectile.SpawnProjectile(Player.getPlayerPosition());
-
+	
 	Enemy.Load();
 	Enemy.setEnemyPos(sf::Vector2f(100, 80));
 
 	Enemy2.Load();
 	Enemy2.setEnemyPos(sf::Vector2f(200, 160));
 
+	// projectile
+	TextureBank::loadAllTextures();
+	CProjectile projectile;
+	projectile.setPosition(Player.getPlayerPosition());
+	addGameObject(&projectile);
+
+
 	while (_running)
 	{
+		// deltaTime
+		sf::Time elapsed = clock.restart();
+		float deltaTime = elapsed.asSeconds();
 		while (_window.pollEvent(e))
 		{
 			ProcessWindowEvent(e);
 		}
 
 		_window.clear(sf::Color::Blue);
-
-		Player.Tick();
+	
+		Player.Tick(deltaTime);
 		Enemy.Tick();
 		Enemy2.Tick();
 
@@ -48,11 +59,11 @@ void CApplication::Run()
 		Enemy.renderTo(_window);
 		Enemy2.renderTo(_window);
 
-		
-		Projectile.Tick();
-		// drawing a projectile to window
-		_window.draw(Projectile.sprite);
-
+		for (CGameObject* currentObject : gameObjects)
+		{
+			currentObject->Tick(deltaTime);
+			currentObject->drawTo(_window);
+		}
 
 		_window.display();
 	}
@@ -65,3 +76,9 @@ void CApplication::ProcessWindowEvent(const sf::Event& e)
 		_running = false;
 	}
 }
+
+void CApplication::addGameObject(CGameObject* _gameObject)
+{
+	gameObjects.push_back(_gameObject);
+}
+

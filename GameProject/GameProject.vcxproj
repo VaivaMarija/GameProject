@@ -147,18 +147,23 @@
     <ClCompile Include="CodeSamples\CodeSamples.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="enemy.cpp" />
-    <ClCompile Include="GameObjects.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="TextureBank.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="enemy.h" />
-    <ClInclude Include="GameObjects.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameWorld.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="TextureBank.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

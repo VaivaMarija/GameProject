@@ -18,5 +18,5 @@ void enemy::Load()
 
 void enemy::Tick()
 {
-	sprite.move(0, 0.8);
+	sprite.move(0, 0.8f);
 }

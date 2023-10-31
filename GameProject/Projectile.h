@@ -4,8 +4,8 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-// create projectile to spawn	-DONE
-// spawn projectile at (player - from player class) location	-DONE(ish)
+#include "GameObject.h"
+
 // move projectile to a direction	-Done(ish)
 // ( get player face direction )
 // ( move projectile from player direction )
@@ -13,11 +13,11 @@
 // projectile types (for power-ups)
 
 
-enum EProjectileType {Player, Enemy, PowerUp};
+enum class EProjectileType {Player, Enemy, PowerUp};
 
 
 // Base projectile class
-class CProjectile
+class CProjectile : public CGameObject
 {
 public:
 	CProjectile();
@@ -26,67 +26,17 @@ public:
 	// get projectile type
 	EProjectileType projectileType;
 
-	// Spawn at location
-	void SpawnProjectile(sf::Vector2f loc/*,sf::Vector2f dir*/);
+	void SetType(EProjectileType _type);
 
-	void SetType(EProjectileType Type);
-
-	// Projectile sprite
-	sf::Sprite sprite;
-
-	void Tick(/*float speed, sf::Vector2f direction*/); // delta time
-
-protected:
-	// Projectile texture
-	sf::Texture texture;
+	void Tick(float _deltaTime) override;
 
 private:
-	// Sets the texture for projectile sprite
-	void SetTexture();
-
 	// projectile direction
 	sf::Vector2f direction;
 
 	// projectile speed
 	float speed;
-
 	// projectile damage
 	float damage;
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-// Child Projectile class for Enemies
-class CEnemyProjectile : public CProjectile
-{
-public:
-	CEnemyProjectile();
-
-	// get projectile
-
-protected:
-
-private:
-	// Projectile texture
-	void ProjectileSprite();
-};
-*/
-
