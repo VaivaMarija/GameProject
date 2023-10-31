@@ -27,14 +27,14 @@ public:
 	EProjectileType projectileType;
 
 	// Spawn at location
-	void SpawnProjectile(sf::Vector2f location);
+	void SpawnProjectile(sf::Vector2f loc/*,sf::Vector2f dir*/);
 
 	void SetType(EProjectileType Type);
 
 	// Projectile sprite
 	sf::Sprite sprite;
 
-	void Tick(/*float speed, sf::Vector2f direction*/);
+	void Tick(/*float speed, sf::Vector2f direction*/); // delta time
 
 protected:
 	// Projectile texture
@@ -50,11 +50,11 @@ private:
 	// projectile speed
 	float speed;
 
-
 	// projectile damage
 	float damage;
 
 };
+
 
 
 

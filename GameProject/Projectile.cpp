@@ -4,7 +4,7 @@
 // Base Projectile
 CProjectile::CProjectile()
 	:	speed{1.0f},
-		direction{1, 0}
+		direction{0, -1.0}
 {
 	SetTexture();
 }
@@ -37,15 +37,15 @@ void CProjectile::SetTexture()
 	sprite.setTexture(texture);
 }
 
-void CProjectile::SpawnProjectile(sf::Vector2f location)
+void CProjectile::SpawnProjectile(sf::Vector2f loc/*, sf::Vector2f dir*/)
 {
-	sprite.setPosition(location); // will change to spawn from player location
-
+	sprite.setPosition(loc);
+	//direction = dir;
 }
 
 
 void CProjectile::Tick()
 {
-	sprite.move(direction * speed);
+	sprite.move(direction * speed); // delta time from josh
 }
 

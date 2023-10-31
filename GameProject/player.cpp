@@ -24,6 +24,8 @@ void player::ReadKeyboardInput()
 	aIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A);
 	dIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D);
 
+	spaceIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space);
+
 	//use sf::Mouse to check for mouse input
 	// sf::Mouse:: enum containing all buttons
 	LMBDown = sf::Mouse::isButtonPressed(sf::Mouse::Left);
@@ -47,7 +49,15 @@ void player::Tick()
 		//rotate player left
 		sprite.rotate(0.1f);
 	}
+	if (spaceIsDown)
+	{
+		//shoot projectile
+		//Projectile.sprite.move(0, -1.0f);
+	}
 
 }
 
-
+sf::Vector2f player::getPlayerPosition() const
+{
+	return sprite.getPosition();
+}

@@ -9,10 +9,6 @@ CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWid
 	vm.width = windowWidth;
 	_window.create(vm, windowTitle);
 
-	// set projectile type
-	Projectile.SetType(Player);
-	// spawning a projectile at the center of the window ( move to player later)
-	Projectile.SpawnProjectile({ static_cast<float>(windowWidth) / 2, static_cast<float>(windowHeight) / 2 });
 }
 
 CApplication::~CApplication()
@@ -24,6 +20,9 @@ void CApplication::Run()
 	sf::Event e;
 	Player.Load();
 	Player.setPlayerPos(sf::Vector2f(800, 450));
+
+	// spawning a projectile at the center of the window ( move to player later)
+	Projectile.SpawnProjectile(Player.getPlayerPosition());
 
 	Enemy.Load();
 	Enemy.setEnemyPos(sf::Vector2f(100, 80));
