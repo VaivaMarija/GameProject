@@ -13,9 +13,14 @@ void player::setPlayerPos(sf::Vector2f newPos)
 
 void player::Load() 
 {
+	//load texture
 	texture.loadFromFile("Content/Textures/Player/playerShip1_blue.png");
+	//add texture to sprite
 	sprite.setTexture(texture);
+	//set sprite origin to be in the centre of itself, so it rotates on the centre
 	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
+	
+	setHealthPoints(3);
 }
 
 void player::ReadKeyboardInput()
@@ -29,6 +34,21 @@ void player::ReadKeyboardInput()
 	//use sf::Mouse to check for mouse input
 	// sf::Mouse:: enum containing all buttons
 	LMBDown = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+}
+
+float player::getHealthPoints()
+{
+	return healthPoints;
+}
+
+void player::setHealthPoints(float _newHealthPoints)
+{
+	healthPoints = _newHealthPoints;
+}
+
+bool player::checkForDeath()
+{
+	return healthPoints = 0;
 }
 
 void player::Tick(float _deltaTime)
@@ -46,7 +66,6 @@ void player::Tick(float _deltaTime)
 		{
 			sprite.move(scaledMovement);
 		}
-		
 	}
 	if(aIsDown)
 	{

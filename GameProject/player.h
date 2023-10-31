@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include <iostream>
+#include "Projectile.h"
 
 class player
 {
@@ -10,6 +11,9 @@ public:
 	void Load();
 	void Tick(float);
 	void ReadKeyboardInput();
+	float getHealthPoints();
+	void setHealthPoints(float _newHealthPoints);
+	bool checkForDeath();
 
 	bool wIsDown;
 	bool aIsDown;
@@ -18,4 +22,5 @@ public:
 private:
 	sf::Texture texture;
 	sf::Sprite sprite;
+	float healthPoints;
 };
