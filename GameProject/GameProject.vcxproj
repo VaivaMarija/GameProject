@@ -147,11 +147,13 @@
     <ClCompile Include="CodeSamples\CodeSamples.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

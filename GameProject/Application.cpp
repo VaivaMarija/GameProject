@@ -8,6 +8,9 @@ CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWid
 	vm.height = windowHeight;
 	vm.width = windowWidth;
 	_window.create(vm, windowTitle);
+
+	// spawning a projectile at the center of the window ( move to player later)
+	Projectile.SpawnProjectile({ static_cast<float>(windowWidth) / 2, static_cast<float>(windowHeight) / 2 });
 }
 
 CApplication::~CApplication()
@@ -38,10 +41,17 @@ void CApplication::Run()
 		Player.Tick();
 		Enemy.Tick();
 		Enemy2.Tick();
+
 		// Todo: Add your game code!
 		Player.renderTo(_window);
 		Enemy.renderTo(_window);
 		Enemy2.renderTo(_window);
+
+		
+		Projectile.Tick();
+		// drawing a projectile to window
+		_window.draw(Projectile.sprite);
+
 
 		_window.display();
 	}
