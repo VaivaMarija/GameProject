@@ -8,7 +8,7 @@ public:
 	void renderTo(sf::RenderWindow& window);
 	void setPlayerPos(sf::Vector2f newPos);
 	void Load();
-	void Tick();
+	void Tick(float);
 	void ReadKeyboardInput();
 
 	bool wIsDown;

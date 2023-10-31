@@ -19,6 +19,9 @@ CApplication::~CApplication()
 
 void CApplication::Run()
 {
+	sf::Clock clock;
+	
+
 	sf::Event e;
 	Player.Load();
 	Player.setPlayerPos(sf::Vector2f(800, 450));
@@ -31,14 +34,16 @@ void CApplication::Run()
 
 	while (_running)
 	{
+		sf::Time elapsed = clock.restart();
+		float deltaTime = elapsed.asSeconds();
 		while (_window.pollEvent(e))
 		{
 			ProcessWindowEvent(e);
 		}
 
 		_window.clear(sf::Color::Blue);
-
-		Player.Tick();
+	
+		Player.Tick(deltaTime);
 		Enemy.Tick();
 		Enemy2.Tick();
 
