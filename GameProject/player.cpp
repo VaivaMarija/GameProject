@@ -12,8 +12,10 @@ void player::setPlayerPos(sf::Vector2f newPos)
 	sprite.setPosition(newPos);
 }
 
-void player::Load() 
+void player::Load(sf::Vector2u _windowSize) 
 {
+	windowRectangle.width = _windowSize.x;
+	windowRectangle.height = _windowSize.y;
 	//load texture
 	texture.loadFromFile("Content/Textures/Player/playerShip1_blue.png");
 	//add texture to sprite
@@ -31,6 +33,7 @@ void player::ReadKeyboardInput()
 	wIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W);
 	aIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A);
 	dIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D);
+	debugIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::O);
 
 	spaceIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space);
 
@@ -47,6 +50,7 @@ int player::getHealthPoints()
 void player::decreaseHealth()
 {
 	healthPoints = healthPoints - 10;
+	CApplication::setIsDead(checkForDeath());
 }
 
 void player::resetHealth()
@@ -56,7 +60,7 @@ void player::resetHealth()
 
 bool player::checkForDeath()
 {
-	return healthPoints = 0;
+	return healthPoints <= 0;
 }
 
 int player::getScore()
@@ -85,7 +89,8 @@ void player::Tick(float _deltaTime)
 		sf::Vector2f movement(sin(RotAsRad), cos(RotAsRad) * -1);
 		movement *= 180.0f;
 		sf::Vector2f scaledMovement = movement * _deltaTime;
-		if (true)
+		//if the windowrectangle contains the next position of the player, we allow movement, if not, player is exiting the play area so we stop them
+		if (windowRectangle.contains(sprite.getPosition() + scaledMovement))
 		{
 			sprite.move(scaledMovement);
 		}
@@ -107,6 +112,10 @@ void player::Tick(float _deltaTime)
 		projectile->setPosition(getPlayerPosition());
 		application->addGameObject(projectile);
 	}
+	if (debugIsDown)
+	{
+		decreaseHealth();
+	}
 
 }
 
@@ -114,6 +123,15 @@ sf::Vector2f player::getPlayerPosition() const
 {
 	return sprite.getPosition();
 }
+
+/*
+// get player rotation ?
+sf::Vector2f player::getPLayerRotation()
+{
+	return sprite.getRotation();
+}
+*/
+
 
 void player::setApplication(CApplication* _application)
 {

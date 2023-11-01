@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "Projectile.h"
 #include "Player.h"
+#include <SFML/System/Clock.hpp>
 #include "Asteroids.h"
 
 class CApplication
@@ -15,7 +16,8 @@ public:
 
 	void Run();
 	player Player;
-	
+	static void setIsDead(bool _isTrue);
+	bool getIsDead();
 	
 	std::vector<enemy>Enemies;
 	std::vector<Asteroids>asteroids;
@@ -31,9 +33,8 @@ private:
 	int y;
 	sf::RenderWindow _window;
 	bool _running;
-
-	// Projectile object to be able to spawn a projectile - move to player later
-	CProjectile Projectile;
+	static bool isDead;
 
 	std::vector<CGameObject*> gameObjects;
+
 };
