@@ -68,9 +68,10 @@ void CApplication::Run()
 	
 	sf::Text healthText;
 	healthText.setFont(font);
-	healthText.setCharacterSize(24);
-	healthText.setFillColor(sf::Color::White);
-	healthText.setPosition(0, 25);
+	healthText.setCharacterSize(55);
+	healthText.setFillColor(sf::Color::Red);
+	//healthText.setStyle(sf::Text::Bold);
+	//healthText.setPosition(0, 25);
 	
 
 	sf::Text deathText;
@@ -102,7 +103,21 @@ void CApplication::Run()
 		//set string to display
 		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
 		
-		healthText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
+		sf::String healthString;
+		switch (Player.getHealthPoints()) {
+		case 10:
+			healthString = "_";
+			break;
+		case 20:
+			healthString = "_ _";
+			break;
+		case 30:
+			healthString = "_ _ _";
+			break;
+		default:
+			healthString = "";
+		}
+		healthText.setString(healthString);
 
 		_window.draw(pointsText);
 		_window.draw(healthText);
@@ -117,6 +132,7 @@ void CApplication::Run()
 			{
 				if (deathTimer.getElapsedTime().asSeconds() > 3)
 				{
+					//exitGame
 					_running = false;
 				}
 			}
