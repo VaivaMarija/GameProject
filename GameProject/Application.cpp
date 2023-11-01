@@ -33,6 +33,12 @@ void CApplication::Run()
 	SpawnEnemy(sf::Vector2f(x, y));
 	SpawnEnemy(sf::Vector2f(x, y));
 
+	//Asteroids
+	asteroids.reserve(8);
+	SpawnAsteroids(sf::Vector2f(x, y));
+	SpawnAsteroids(sf::Vector2f(x, y));
+	SpawnAsteroids(sf::Vector2f(x, y));
+	SpawnAsteroids(sf::Vector2f(x, y));
 
 	// projectile
 	TextureBank::loadAllTextures();
@@ -73,21 +79,14 @@ void CApplication::Run()
 		pointsText.setFillColor(sf::Color::White);
 		_window.draw(pointsText);
 		
-
 		
-
 		for (CGameObject* currentObject : gameObjects)
 		{
 			currentObject->Tick(deltaTime);
 			currentObject->drawTo(_window);
 		}
+			
 
-		
-		for(enemy& e:Enemies)
-		{
-			e.Tick(deltaTime);
-			e.renderTo(_window);
-		}
 		_window.display();
 	}
 }
@@ -103,11 +102,23 @@ void CApplication::ProcessWindowEvent(const sf::Event& e)
 //spawns enemy at "random" location
 void CApplication::SpawnEnemy(sf::Vector2f atPosition)
 {
-	enemy& enemyRef = Enemies.emplace_back();
-	enemyRef.Load();
-	enemyRef.setEnemyPos(atPosition);
+	enemy* enemyRef = new enemy();
+	enemyRef->Load();
+	enemyRef->setPosition(atPosition);
 	x = (rand() % 1200) + 100;
-	y = (rand() % 300) + 100;
+	y = ((rand() % 300) + 100) * -1;
+	addGameObject(enemyRef);
+
+}
+
+void CApplication::SpawnAsteroids(sf::Vector2f atPosition)
+{
+	Asteroids* AsteroidRef = new Asteroids();
+	AsteroidRef->Load();
+	AsteroidRef->setPosition(atPosition);
+	x = (rand() % 1200) + 50;
+	y = ((rand() % 600) + 100) * -1;
+	addGameObject(AsteroidRef);
 }
 
 void CApplication::addGameObject(CGameObject* _gameObject)

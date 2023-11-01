@@ -1,10 +1,12 @@
 #pragma once
+
 #include "SFML/Graphics.hpp"
 #include "Math.h"
 #include <iostream>
 
 #include "GameObject.h"
-class enemy : public CGameObject
+
+class Asteroids :  public CGameObject
 {
 public:
 
@@ -13,8 +15,8 @@ public:
 	void Tick(float _deltaTime) override;
 
 
-	int health = 50;
-	//void Death();
+	int health = 10;
+
 
 private:
 	sf::Texture texture;

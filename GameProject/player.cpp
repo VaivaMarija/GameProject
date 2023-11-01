@@ -93,7 +93,7 @@ void player::Tick(float _deltaTime)
 	if(aIsDown)
 	{
 		//rotate player left
-		sprite.rotate(-150.0 * _deltaTime);
+		sprite.rotate(-150.0f * _deltaTime);
 	}
 	if (dIsDown)
 	{
