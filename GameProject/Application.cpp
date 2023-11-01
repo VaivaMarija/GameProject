@@ -2,6 +2,8 @@
 #include "TextureBank.h"
 #include <SFML/Window/Event.hpp>
 
+bool CApplication::isDead = false;
+
 CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWidth, unsigned int windowHeight)
 	: _running(true)
 {
@@ -18,6 +20,7 @@ CApplication::~CApplication()
 void CApplication::setIsDead(bool _isTrue)
 {
 	isDead = _isTrue;
+	
 }
 
 bool CApplication::getIsDead()
@@ -28,11 +31,11 @@ bool CApplication::getIsDead()
 void CApplication::Run()
 {
 	sf::Clock clock;
-	
+	sf::Clock deathTimer;
 
 	sf::Event e;
 	Player.setApplication(this);
-	Player.Load();
+	Player.Load(_window.getSize());
 	Player.setPlayerPos(sf::Vector2f(800, 450));
 
 	//enemies
@@ -80,6 +83,8 @@ void CApplication::Run()
 
 	while (_running)
 	{
+		const bool wasDead = isDead;
+		
 		// deltaTime
 		sf::Time elapsed = clock.restart();
 		float deltaTime = elapsed.asSeconds();
@@ -97,13 +102,24 @@ void CApplication::Run()
 		//set string to display
 		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
 		
-		healthText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()/10));
+		healthText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
 
 		_window.draw(pointsText);
 		_window.draw(healthText);
-		if (isDead)
+		if(isDead)
 		{
 			_window.draw(deathText);
+			if(!wasDead)
+			{
+				deathTimer.restart();
+			}
+			else
+			{
+				if (deathTimer.getElapsedTime().asSeconds() > 3)
+				{
+					_running = false;
+				}
+			}
 		}
 
 		for (CGameObject* currentObject : gameObjects)
