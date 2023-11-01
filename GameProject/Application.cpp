@@ -55,7 +55,19 @@ void CApplication::Run()
 
 		// Todo: Add your game code!
 		Player.renderTo(_window);
-		
+
+		// shoot projectile
+		// shoot projectile
+		if ((e.Type == sf::Event::KeyPressed) && (Event.Key.Code == sf::Key::Space))
+		{
+
+		}
+		bool spaceKeyDown = Input.IsKeyDown(sf)
+		if (e.Space == sf::Event::KeyPressed)
+		{
+
+		}
+
 
 		for (CGameObject* currentObject : gameObjects)
 		{

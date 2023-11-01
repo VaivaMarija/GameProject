@@ -3,7 +3,6 @@
 
 CGameObject::CGameObject()
 {
-
 }
 
 void CGameObject::setTexture(const sf::Texture& _texture)

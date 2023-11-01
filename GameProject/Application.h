@@ -31,4 +31,5 @@ private:
 	bool _running;
 
 	std::vector<CGameObject*> gameObjects;
+
 };

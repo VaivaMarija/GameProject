@@ -10,6 +10,7 @@ class player
 public:
 	void renderTo(sf::RenderWindow& window);
 	void setPlayerPos(sf::Vector2f newPos);
+
 	void Load();
 	void Tick(float);
 	void ReadKeyboardInput();
@@ -17,7 +18,9 @@ public:
 	void setHealthPoints(float _newHealthPoints);
 	bool checkForDeath();
 
-	sf::Vector2f getPlayerPosition() const; // move to the thing later
+	sf::Vector2f getPlayerPosition() const; 
+
+	//sf::Vector2f getPLayerRotation();  // get player rotation?
 
 	bool wIsDown;
 	bool aIsDown;
@@ -31,11 +34,6 @@ private:
 	sf::Texture texture;
 	sf::Sprite sprite;
 	float healthPoints;
-
-	float fireRate;
-	float reloadTime;
-
-	std::vector<CProjectile> magazine;
 
 	CApplication* application;
 };

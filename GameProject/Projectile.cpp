@@ -5,7 +5,7 @@
 // Base Projectile
 CProjectile::CProjectile()
 	:	speed{1000.0f},
-		direction{0, -1.0}
+		direction{0, -1.0} // change to player current rotation 
 {
 	setTexture(CTextureBank::playerProjectileT);
 }
@@ -19,3 +19,4 @@ void CProjectile::Tick(float _deltaTime)
 {
 	sprite.move(direction * speed * _deltaTime);
 }
+

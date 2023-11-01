@@ -95,6 +95,15 @@ sf::Vector2f player::getPlayerPosition() const
 	return sprite.getPosition();
 }
 
+/*
+// get player rotation ?
+sf::Vector2f player::getPLayerRotation()
+{
+	return sprite.getRotation();
+}
+*/
+
+
 void player::setApplication(CApplication* _application)
 {
 	application = _application;

@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="BulletPool.cpp" />
+    <ClCompile Include="ObjectPool.cpp" />
     <ClCompile Include="CodeSamples\CodeSamples.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="enemy.cpp" />
@@ -158,7 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="BulletPool.h" />
+    <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="GameObject.h" />
