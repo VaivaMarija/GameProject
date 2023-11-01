@@ -1,49 +1,49 @@
 #include "GameObject.h"
-
+#include "Collider.h"  // Include your CCollider class
 
 CGameObject::CGameObject()
 {
-
+    // Initialize your game object properties here.
 }
 
 void CGameObject::setTexture(const sf::Texture& _texture)
 {
-/*
-	if (textureType == Player)
-	{
-		//load player texture
-		texture.loadFromFile("Content/Textures/Player/playerShip1_blue.png");
-	}
-	else if (textureType == Enemy)
-	{
-		//load enemy texture
-		texture.loadFromFile("Content/Textures/Enemies/enemyBlack1.png");
-	}
-	else if (textureType == Meteor)
-	{
-		//load asteroid texture
-		texture.loadFromFile("Content/Textures/Meteors/meteorBrown_med1.png"); // there's a bunch of them tho so idk.
-	}
-	//add texture to sprite
-*/
-	sprite.setTexture(_texture);
+    sprite.setTexture(_texture);
+
+    // Set the collider's radius to be half of the sprite's width.
+    float radius = sprite.getLocalBounds().width / 2;
+
+    // The position should be set in the constructor or when setting the game object's position.
+    // This ensures that the collider's position is synchronized with the sprite's position.
+    collider = CCollider(radius, sprite.getPosition());
 }
 
 void CGameObject::setType(ETexture type)
 {
-	textureType = type;
+    textureType = type;
 }
 
 void CGameObject::drawTo(sf::RenderTarget& _target)
 {
-	_target.draw(sprite);
+    _target.draw(sprite);
 }
 
 void CGameObject::Tick(float _deltaTime)
 {
+    // Implement your game logic here.
 }
 
 void CGameObject::setPosition(sf::Vector2f _position)
 {
-	sprite.setPosition(_position);
+    sprite.setPosition(_position);
+
+    // Update the collider's position when setting the object's position.
+    collider.SetPosition(_position);
+}
+
+// Implement the GetCollider function as mentioned in previous responses.
+
+const CCollider& CGameObject::GetCollider() const
+{
+    return collider;
 }

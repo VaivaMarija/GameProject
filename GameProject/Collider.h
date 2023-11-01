@@ -5,11 +5,16 @@
 class CCollider
 {
 public:
-	bool IsColliding(const CCollider& collider) const;
+    CCollider();
+    CCollider(float radius, const sf::Vector2f& position);
+    bool IsColliding(const CCollider& collider) const;
 
-protected:
+    const sf::Vector2f& GetPosition() const;
+    float GetRadius() const;
+
+    void SetPosition(const sf::Vector2f& position);
 
 private:
-	float radius;
-	sf::Vector2f position;
+    float radius;
+    sf::Vector2f position;
 };
