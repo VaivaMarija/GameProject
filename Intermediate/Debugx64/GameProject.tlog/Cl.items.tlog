@@ -1,4 +1,5 @@
 C:\Work\Apprenticeship\Projects\GameProject\GameProject\Application.cpp;C:\Work\Apprenticeship\Projects\GameProject\Intermediate\Debugx64\Application.obj
+C:\Work\Apprenticeship\Projects\GameProject\GameProject\ObjectPool.cpp;C:\Work\Apprenticeship\Projects\GameProject\Intermediate\Debugx64\ObjectPool.obj
 C:\Work\Apprenticeship\Projects\GameProject\GameProject\CodeSamples\CodeSamples.cpp;C:\Work\Apprenticeship\Projects\GameProject\Intermediate\Debugx64\CodeSamples.obj
 C:\Work\Apprenticeship\Projects\GameProject\GameProject\Collider.cpp;C:\Work\Apprenticeship\Projects\GameProject\Intermediate\Debugx64\Collider.obj
 C:\Work\Apprenticeship\Projects\GameProject\GameProject\enemy.cpp;C:\Work\Apprenticeship\Projects\GameProject\Intermediate\Debugx64\enemy.obj
@@ -8,3 +9,4 @@ C:\Work\Apprenticeship\Projects\GameProject\GameProject\Main.cpp;C:\Work\Apprent
 C:\Work\Apprenticeship\Projects\GameProject\GameProject\Projectile.cpp;C:\Work\Apprenticeship\Projects\GameProject\Intermediate\Debugx64\Projectile.obj
 C:\Work\Apprenticeship\Projects\GameProject\GameProject\player.cpp;C:\Work\Apprenticeship\Projects\GameProject\Intermediate\Debugx64\player.obj
 C:\Work\Apprenticeship\Projects\GameProject\GameProject\TextureBank.cpp;C:\Work\Apprenticeship\Projects\GameProject\Intermediate\Debugx64\TextureBank.obj
+C:\Work\Apprenticeship\Projects\GameProject\GameProject\Weapon.cpp;C:\Work\Apprenticeship\Projects\GameProject\Intermediate\Debugx64\Weapon.obj

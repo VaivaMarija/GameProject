@@ -108,9 +108,7 @@ void player::Tick(float _deltaTime)
 	if (spaceIsDown)
 	{
 		//shoot projectile
-		CProjectile* projectile = new CProjectile;
-		projectile->setPosition(getPlayerPosition());
-		application->addGameObject(projectile);
+		weapon.Fire(_deltaTime, application, getPlayerPosition(), sprite.getRotation());
 	}
 	if (debugIsDown)
 	{
@@ -123,14 +121,6 @@ sf::Vector2f player::getPlayerPosition() const
 {
 	return sprite.getPosition();
 }
-
-/*
-// get player rotation ?
-sf::Vector2f player::getPLayerRotation()
-{
-	return sprite.getRotation();
-}
-*/
 
 
 void player::setApplication(CApplication* _application)

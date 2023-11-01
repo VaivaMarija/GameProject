@@ -29,11 +29,10 @@ public:
 
 	void Tick(float _deltaTime) override;
 
+	void setDirection(sf::Vector2f _direction);
+
 	// function that returns projectile type?
 	// with set speeds dmg etc, to then be used for enemies, powerups, etc.
-
-	// float playerRotation = Player.getRotation();
-
 private:
 	// projectile direction
 	sf::Vector2f direction;

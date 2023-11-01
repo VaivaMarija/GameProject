@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Projectile.h"
+#include "Weapon.h"
 #include <vector>
 #include <SFML/Graphics/Rect.hpp>
 
@@ -24,8 +25,6 @@ public:
 
 	sf::Vector2f getPlayerPosition() const; 
 
-	//sf::Vector2f getPLayerRotation();  // get player rotation?
-
 	bool wIsDown;
 	bool aIsDown;
 	bool dIsDown;
@@ -40,7 +39,9 @@ private:
 	sf::Sprite sprite;
 	int healthPoints;
 	int score;
-	std::vector<CProjectile> magazine;
+
 	sf::FloatRect windowRectangle;
 	CApplication* application;
+
+	CWeapon weapon;
 };
