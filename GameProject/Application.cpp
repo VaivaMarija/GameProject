@@ -27,8 +27,9 @@ void CApplication::Run()
 	sf::Event e;
 	Player.Load();
 	Player.setPlayerPos(sf::Vector2f(800, 450));
-	Enemies.reserve(10);
+
 	//enemies
+	Enemies.reserve(10);
 	SpawnEnemy(sf::Vector2f(200, 80));
 	SpawnEnemy(sf::Vector2f(x, y));
 	SpawnEnemy(sf::Vector2f(x, y));
@@ -49,19 +50,15 @@ void CApplication::Run()
 		Player.Tick(deltaTime);		
 
 		// Todo: Add your game code!
-		Player.renderTo(_window);
-		
-
+		Player.renderTo(_window);		
 		
 		Projectile.Tick();
 		// drawing a projectile to window
 		_window.draw(Projectile.sprite);
-
-
 		
 		for(enemy& e:Enemies)
 		{
-			e.Tick();
+			e.Tick(deltaTime);
 			e.renderTo(_window);
 		}
 		_window.display();

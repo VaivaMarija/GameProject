@@ -16,9 +16,12 @@ void enemy::Load()
 	sprite.setTexture(texture);
 }
 
-void enemy::Tick()
+void enemy::Tick(float _deltaTime)
 {
-	sprite.move(0, 0.5);
+	sf::Vector2f EnemySpeed(0, 10);
+	EnemySpeed *= 15.0f;
+	sf::Vector2f ESpeed = EnemySpeed * _deltaTime;
+	sprite.move(ESpeed);
 
 	if (sprite.getPosition().y > 950)
 	{
