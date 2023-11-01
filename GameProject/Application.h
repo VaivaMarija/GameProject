@@ -14,7 +14,8 @@ public:
 
 	void Run();
 	player Player;
-	
+	void setIsDead(bool _isTrue);
+	bool getIsDead();
 	
 	std::vector<enemy>Enemies;
 
@@ -29,6 +30,7 @@ private:
 	int y;
 	sf::RenderWindow _window;
 	bool _running;
+	bool isDead;
 
 	// Projectile object to be able to spawn a projectile - move to player later
 	CProjectile Projectile;

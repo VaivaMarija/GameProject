@@ -15,6 +15,16 @@ CApplication::~CApplication()
 {
 }
 
+void CApplication::setIsDead(bool _isTrue)
+{
+	isDead = _isTrue;
+}
+
+bool CApplication::getIsDead()
+{
+	return isDead;
+}
+
 void CApplication::Run()
 {
 	sf::Clock clock;
@@ -48,6 +58,25 @@ void CApplication::Run()
 	}
 	//set font
 	pointsText.setFont(font);
+	//set character size, pixels not points
+	pointsText.setCharacterSize(24);
+	//set colour
+	pointsText.setFillColor(sf::Color::White);
+	
+	sf::Text healthText;
+	healthText.setFont(font);
+	healthText.setCharacterSize(24);
+	healthText.setFillColor(sf::Color::White);
+	healthText.setPosition(0, 25);
+	
+
+	sf::Text deathText;
+	deathText.setFont(font);
+	deathText.setCharacterSize(240);
+	deathText.setOrigin(deathText.getGlobalBounds().width / 2, deathText.getGlobalBounds().height / 2);
+	deathText.setPosition(300, 250);
+	deathText.setFillColor(sf::Color::White);
+	deathText.setString(sf::String("YOU DIED"));
 
 	while (_running)
 	{
@@ -66,15 +95,16 @@ void CApplication::Run()
 		// Todo: Add your game code!
 
 		//set string to display
-		pointsText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
-		//set character size, pixels not points
-		pointsText.setCharacterSize(24);
-		//set colour
-		pointsText.setFillColor(sf::Color::White);
-		_window.draw(pointsText);
+		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
 		
+		healthText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()/10));
 
-		
+		_window.draw(pointsText);
+		_window.draw(healthText);
+		if (isDead)
+		{
+			_window.draw(deathText);
+		}
 
 		for (CGameObject* currentObject : gameObjects)
 		{
@@ -91,6 +121,7 @@ void CApplication::Run()
 		_window.display();
 	}
 }
+
 
 void CApplication::ProcessWindowEvent(const sf::Event& e)
 {
