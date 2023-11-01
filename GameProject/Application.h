@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "Projectile.h"
 #include "Player.h"
+#include <SFML/System/Clock.hpp>
 
 class CApplication
 {
@@ -14,7 +15,8 @@ public:
 
 	void Run();
 	player Player;
-	
+	static void setIsDead(bool _isTrue);
+	bool getIsDead();
 	
 	std::vector<enemy>Enemies;
 
@@ -29,6 +31,7 @@ private:
 	int y;
 	sf::RenderWindow _window;
 	bool _running;
+	static bool isDead;
 
 	std::vector<CGameObject*> gameObjects;
 

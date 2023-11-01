@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Projectile.h"
 #include <vector>
+#include <SFML/Graphics/Rect.hpp>
 
 class CApplication;
 
@@ -10,13 +11,16 @@ class player
 public:
 	void renderTo(sf::RenderWindow& window);
 	void setPlayerPos(sf::Vector2f newPos);
-
-	void Load();
+	void Load(sf::Vector2u _windowSize);
 	void Tick(float);
 	void ReadKeyboardInput();
-	float getHealthPoints();
-	void setHealthPoints(float _newHealthPoints);
+	int getHealthPoints();
+	void decreaseHealth();
+	void resetHealth();
 	bool checkForDeath();
+	int getScore();
+	void addScore(int _scoreToAdd);
+	void resetScore();
 
 	sf::Vector2f getPlayerPosition() const; 
 
@@ -27,13 +31,16 @@ public:
 	bool dIsDown;
 	bool LMBDown;
 	bool spaceIsDown;
+	bool debugIsDown;
 
 	void setApplication(CApplication* _application);
 
 private:
 	sf::Texture texture;
 	sf::Sprite sprite;
-	float healthPoints;
-
+	int healthPoints;
+	int score;
+	std::vector<CProjectile> magazine;
+	sf::FloatRect windowRectangle;
 	CApplication* application;
 };
