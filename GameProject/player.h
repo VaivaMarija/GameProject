@@ -32,6 +32,9 @@ private:
 	sf::Sprite sprite;
 	float healthPoints;
 
+	float fireRate;
+	float reloadTime;
+
 	std::vector<CProjectile> magazine;
 
 	CApplication* application;

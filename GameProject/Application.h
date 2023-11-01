@@ -30,8 +30,5 @@ private:
 	sf::RenderWindow _window;
 	bool _running;
 
-	// Projectile object to be able to spawn a projectile - move to player later
-	CProjectile Projectile;
-
 	std::vector<CGameObject*> gameObjects;
 };

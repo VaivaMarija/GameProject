@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BulletPool.cpp" />
     <ClCompile Include="CodeSamples\CodeSamples.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="enemy.cpp" />
@@ -153,9 +154,11 @@
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="TextureBank.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="BulletPool.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="GameObject.h" />
@@ -164,6 +167,7 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="TextureBank.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

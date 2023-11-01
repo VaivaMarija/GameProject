@@ -4,10 +4,10 @@
 
 // Base Projectile
 CProjectile::CProjectile()
-	:	speed{1.0f},
+	:	speed{1000.0f},
 		direction{0, -1.0}
 {
-	setTexture(TextureBank::projectileTexture);
+	setTexture(CTextureBank::playerProjectileT);
 }
 
 void CProjectile::SetType(EProjectileType _type)

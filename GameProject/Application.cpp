@@ -18,9 +18,8 @@ CApplication::~CApplication()
 void CApplication::Run()
 {
 	sf::Clock clock;
-	
-
 	sf::Event e;
+
 	Player.setApplication(this);
 	Player.Load();
 	Player.setPlayerPos(sf::Vector2f(800, 450));
@@ -34,7 +33,7 @@ void CApplication::Run()
 
 
 	// projectile
-	TextureBank::loadAllTextures();
+	CTextureBank::loadAllTextures();
 	CProjectile projectile;
 	projectile.setPosition(Player.getPlayerPosition());
 	addGameObject(&projectile);
@@ -64,7 +63,6 @@ void CApplication::Run()
 			currentObject->drawTo(_window);
 		}
 
-		
 		for(enemy& e:Enemies)
 		{
 			e.Tick();
@@ -92,8 +90,8 @@ void CApplication::SpawnEnemy(sf::Vector2f atPosition)
 	y = (rand() % 300) + 100;
 }
 
+// add game objects to the game object vector
 void CApplication::addGameObject(CGameObject* _gameObject)
 {
 	gameObjects.push_back(_gameObject);
 }
-

@@ -13,6 +13,8 @@
 // projectile types (for power-ups)
 
 
+// weapon class, projectile pool (inside weapon?)
+
 enum class EProjectileType {Player, Enemy, PowerUp};
 
 
