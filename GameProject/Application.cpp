@@ -2,9 +2,13 @@
 #include "TextureBank.h"
 #include <SFML/Window/Event.hpp>
 
+// Define the static member variable outside of the class
+bool CApplication::isDead = false;
+
 CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWidth, unsigned int windowHeight)
-    : _running(true), x(0), y(0)  // Initialize x and y
+    : _running(true), x(0), y(0)
 {
+    isDead = false; // Set isDead to false here
     sf::VideoMode vm;
     vm.height = windowHeight;
     vm.width = windowWidth;
@@ -13,6 +17,16 @@ CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWid
 
 CApplication::~CApplication()
 {
+}
+
+void CApplication::setIsDead(bool _isTrue)
+{
+    isDead = _isTrue;
+}
+
+bool CApplication::getIsDead()
+{
+    return isDead;
 }
 
 void CApplication::Run()
@@ -46,6 +60,24 @@ void CApplication::Run()
     }
     //set font
     pointsText.setFont(font);
+    //set character size, pixels not points
+    pointsText.setCharacterSize(24);
+    //set colour
+    pointsText.setFillColor(sf::Color::White);
+
+    sf::Text healthText;
+    healthText.setFont(font);
+    healthText.setCharacterSize(24);
+    healthText.setFillColor(sf::Color::White);
+    healthText.setPosition(0, 25);
+
+    sf::Text deathText;
+    deathText.setFont(font);
+    deathText.setCharacterSize(240);
+    deathText.setOrigin(deathText.getGlobalBounds().width / 2, deathText.getGlobalBounds().height / 2);
+    deathText.setPosition(300, 250);
+    deathText.setFillColor(sf::Color::White);
+    deathText.setString(sf::String("YOU DIED"));
 
     while (_running)
     {
@@ -96,8 +128,6 @@ void CApplication::Run()
     }
 }
 
-// Function definitions should be placed here, outside of the Run function.
-
 void CApplication::ProcessWindowEvent(const sf::Event& e)
 {
     if (e.type == sf::Event::Closed)
@@ -106,7 +136,6 @@ void CApplication::ProcessWindowEvent(const sf::Event& e)
     }
 }
 
-// Spawns an enemy at a "random" location
 void CApplication::SpawnEnemy(sf::Vector2f atPosition)
 {
     enemy& enemyRef = Enemies.emplace_back();
