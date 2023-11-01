@@ -110,7 +110,6 @@ void CApplication::Run()
 		Player.renderTo(_window);
 
 
-
 		//set string to display
 		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
 
