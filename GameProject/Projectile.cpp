@@ -1,51 +1,21 @@
 #include "Projectile.h"
+#include "TextureBank.h"
 
 
 // Base Projectile
 CProjectile::CProjectile()
 	:	speed{1.0f},
-		direction{1, 0}
+		direction{0, -1.0}
 {
-	SetTexture();
+	setTexture(TextureBank::projectileTexture);
 }
 
-void CProjectile::SetType(EProjectileType Type)
+void CProjectile::SetType(EProjectileType _type)
 {
-	projectileType = Type;
+	projectileType = _type;
 }
 
-// Projectile texture
-void CProjectile::SetTexture()
+void CProjectile::Tick(float _deltaTime)
 {
-	if (projectileType == Player)
-	{
-		// Load from file with the relative path of the image file
-		texture.loadFromFile("Content/Textures/Lasers/laserGreen.png");
-	}
-	else if (projectileType == Enemy)
-	{
-		// Load from file with the relative path of the image file
-		texture.loadFromFile("Content/Textures/Lasers/laserRed.png");
-	}
-	else
-	{
-		// Load from file with the relative path of the image file
-		texture.loadFromFile("Content/Textures/Lasers/laserBlue.png");
-	}
-
-	// Set texture
-	sprite.setTexture(texture);
+	sprite.move(direction * speed * _deltaTime);
 }
-
-void CProjectile::SpawnProjectile(sf::Vector2f location)
-{
-	sprite.setPosition(location); // will change to spawn from player location
-
-}
-
-
-void CProjectile::Tick()
-{
-	sprite.move(direction * speed);
-}
-

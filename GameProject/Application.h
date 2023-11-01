@@ -18,6 +18,9 @@ public:
 	
 	std::vector<enemy>Enemies;
 
+
+	void addGameObject(CGameObject* _gameObject);
+
 private:
 	void ProcessWindowEvent(const sf::Event& e);
 	void SpawnEnemy(sf::Vector2f atPosition);
@@ -30,7 +33,5 @@ private:
 	// Projectile object to be able to spawn a projectile - move to player later
 	CProjectile Projectile;
 
-	// delta time function
-
-
+	std::vector<CGameObject*> gameObjects;
 };

@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "TextureBank.h"
 #include <SFML/Window/Event.hpp>
 
 CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWidth, unsigned int windowHeight)
@@ -8,11 +9,6 @@ CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWid
 	vm.height = windowHeight;
 	vm.width = windowWidth;
 	_window.create(vm, windowTitle);
-
-	// set projectile type
-	//Projectile.SetType(Player);
-	// spawning a projectile at the center of the window ( move to player later)
-	Projectile.SpawnProjectile({ static_cast<float>(windowWidth) / 2, static_cast<float>(windowHeight) / 2 });
 }
 
 CApplication::~CApplication()
@@ -25,6 +21,7 @@ void CApplication::Run()
 	
 
 	sf::Event e;
+	Player.setApplication(this);
 	Player.Load();
 	Player.setPlayerPos(sf::Vector2f(800, 450));
 
@@ -36,8 +33,25 @@ void CApplication::Run()
 	SpawnEnemy(sf::Vector2f(x, y));
 	SpawnEnemy(sf::Vector2f(x, y));
 
+
+	// projectile
+	TextureBank::loadAllTextures();
+	CProjectile projectile;
+	projectile.setPosition(Player.getPlayerPosition());
+	addGameObject(&projectile);
+
+	sf::Text pointsText;
+	sf::Font font;
+	if (!font.loadFromFile("Content/Fonts/TextFont.ttf"))
+	{
+		//error
+	}
+	//set font
+	pointsText.setFont(font);
+
 	while (_running)
 	{
+		// deltaTime
 		sf::Time elapsed = clock.restart();
 		float deltaTime = elapsed.asSeconds();
 		while (_window.pollEvent(e))
@@ -45,16 +59,29 @@ void CApplication::Run()
 			ProcessWindowEvent(e);
 		}
 
-		_window.clear(sf::Color::Blue);
+		_window.clear(sf::Color::Black);
 	
 		Player.Tick(deltaTime);		
-
+		Player.renderTo(_window);
 		// Todo: Add your game code!
-		Player.renderTo(_window);		
+
+		//set string to display
+		pointsText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
+		//set character size, pixels not points
+		pointsText.setCharacterSize(24);
+		//set colour
+		pointsText.setFillColor(sf::Color::White);
+		_window.draw(pointsText);
 		
-		Projectile.Tick();
-		// drawing a projectile to window
-		_window.draw(Projectile.sprite);
+
+		
+
+		for (CGameObject* currentObject : gameObjects)
+		{
+			currentObject->Tick(deltaTime);
+			currentObject->drawTo(_window);
+		}
+
 		
 		for(enemy& e:Enemies)
 		{
@@ -82,3 +109,9 @@ void CApplication::SpawnEnemy(sf::Vector2f atPosition)
 	x = (rand() % 1200) + 100;
 	y = (rand() % 300) + 100;
 }
+
+void CApplication::addGameObject(CGameObject* _gameObject)
+{
+	gameObjects.push_back(_gameObject);
+}
+

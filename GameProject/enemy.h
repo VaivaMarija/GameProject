@@ -17,7 +17,7 @@ public:
 	void Death();
 
 private:
-	sf::Texture  texture;
+	sf::Texture texture;
 	sf::Sprite sprite;
 };
 

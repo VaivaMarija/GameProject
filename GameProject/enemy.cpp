@@ -33,6 +33,7 @@ void enemy::Tick(float _deltaTime)
 	//{
 		//Destroy GameObject.Enemy;
 	//}
+	sprite.move(0, 0.8f);
 }
 
 
