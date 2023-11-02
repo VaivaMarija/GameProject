@@ -72,6 +72,7 @@ void CApplication::Run()
 	pointsText.setCharacterSize(24);
 	//set colour
 	pointsText.setFillColor(sf::Color::White);
+	pointsText.setPosition(5.f,0);
 
 	sf::Text healthText;
 	healthText.setFont(font);
@@ -87,6 +88,15 @@ void CApplication::Run()
 	deathText.setPosition(300, 250);
 	deathText.setFillColor(sf::Color::White);
 	deathText.setString(sf::String("YOU DIED"));
+
+	sf::RectangleShape healthbar1(sf::Vector2f(50.f, 10.f));
+	healthbar1.setPosition(5,35);
+
+	sf::RectangleShape healthbar2(sf::Vector2f(50.f, 10.f));
+	healthbar2.setPosition(65, 35);
+
+	sf::RectangleShape healthbar3(sf::Vector2f(50.f, 10.f));
+	healthbar3.setPosition(125, 35);
 
 	while (_running)
 	{
@@ -113,10 +123,35 @@ void CApplication::Run()
 		//set string to display
 		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
 
-		healthText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
+		//show and hide health bars based on player's health
+		switch (Player.getHealthPoints())
+		{
+		case 30:
+			healthbar1.setFillColor(sf::Color::White);
+			healthbar2.setFillColor(sf::Color::White);
+			healthbar3.setFillColor(sf::Color::White);
+			break;
+		case 20:
+			healthbar1.setFillColor(sf::Color::White);
+			healthbar2.setFillColor(sf::Color::White);
+			healthbar3.setFillColor(sf::Color::Transparent);
+			break;
+		case 10:
+			healthbar1.setFillColor(sf::Color::White);
+			healthbar2.setFillColor(sf::Color::Transparent);
+			healthbar3.setFillColor(sf::Color::Transparent);
+			break;
+		default:
+			healthbar1.setFillColor(sf::Color::Transparent);
+			healthbar2.setFillColor(sf::Color::Transparent);
+			healthbar3.setFillColor(sf::Color::Transparent);
+		}
 
 		_window.draw(pointsText);
 		_window.draw(healthText);
+		_window.draw(healthbar1);
+		_window.draw(healthbar2);
+		_window.draw(healthbar3);
 		if (isDead)
 		{
 			_window.draw(deathText);
