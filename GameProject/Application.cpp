@@ -20,7 +20,7 @@ CApplication::~CApplication()
 void CApplication::setIsDead(bool _isTrue)
 {
 	isDead = _isTrue;
-	
+
 }
 
 bool CApplication::getIsDead()
@@ -72,13 +72,13 @@ void CApplication::Run()
 	pointsText.setCharacterSize(24);
 	//set colour
 	pointsText.setFillColor(sf::Color::White);
-	
+
 	sf::Text healthText;
 	healthText.setFont(font);
 	healthText.setCharacterSize(24);
 	healthText.setFillColor(sf::Color::White);
 	healthText.setPosition(0, 25);
-	
+
 
 	sf::Text deathText;
 	deathText.setFont(font);
@@ -91,7 +91,7 @@ void CApplication::Run()
 	while (_running)
 	{
 		const bool wasDead = isDead;
-		
+
 		// deltaTime
 		sf::Time elapsed = clock.restart();
 		float deltaTime = elapsed.asSeconds();
@@ -101,37 +101,27 @@ void CApplication::Run()
 		}
 
 		_window.clear(sf::Color::Black);
-	
-		Player.Tick(deltaTime);		
+
+		Player.Tick(deltaTime);
 		Player.renderTo(_window);
 		// Todo: Add your game code!
 
 		// Todo: Add your game code!
 		Player.renderTo(_window);
 
-		// shoot projectile
-		// shoot projectile
-		if ((e.Type == sf::Event::KeyPressed) && (Event.Key.Code == sf::Key::Space))
-		{
 
-		}
-		bool spaceKeyDown = Input.IsKeyDown(sf)
-		if (e.Space == sf::Event::KeyPressed)
-		{
-
-		}
 
 		//set string to display
 		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
-		
+
 		healthText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
 
 		_window.draw(pointsText);
 		_window.draw(healthText);
-		if(isDead)
+		if (isDead)
 		{
 			_window.draw(deathText);
-			if(!wasDead)
+			if (!wasDead)
 			{
 				deathTimer.restart();
 			}
@@ -149,11 +139,9 @@ void CApplication::Run()
 			currentObject->Tick(deltaTime);
 			currentObject->drawTo(_window);
 		}
-			
 
-		}
 		_window.display();
-	}
+	}	
 }
 
 

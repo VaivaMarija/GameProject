@@ -21,7 +21,27 @@ void Asteroids::Tick(float _deltaTime)
 	{
 		setPosition(sf::Vector2f((rand() % 1200) + 100, 0));
 
-		//sprite.setTexture(TextureBank::)
+		int randomTextureA = rand() % 4;
+
+		if (randomTextureA == 0)
+		{
+			sprite.setTexture(CTextureBank::meteorBigT, true);
+		}
+		if (randomTextureA == 1)
+		{
+			sprite.setTexture(CTextureBank::meteorMediumT, true);
+		}
+		if (randomTextureA == 2)
+		{
+			sprite.setTexture(CTextureBank::meteorSmallT, true);
+		}
+		if (randomTextureA == 3)
+		{
+			sprite.setTexture(CTextureBank::meteorTinyT, true);
+		}
+
+		//set sprite origin to be in the centre of itself, so it rotates on the centre
+		sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 	}	
 	sprite.rotate(0.5f);
 }

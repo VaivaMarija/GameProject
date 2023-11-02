@@ -40,7 +40,7 @@ private:
 	sf::Sprite sprite;
 	int healthPoints;
 	int score;
-	std::vector<CProjectile> magazine;
+	
 	sf::FloatRect windowRectangle;
 	CApplication* application;
 };
