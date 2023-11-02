@@ -13,19 +13,19 @@
 
 // weapon class, projectile pool (inside weapon?)
 
-enum class EProjectileType {Player, Enemy, PowerUp};
+// Define the projectile types
+enum class EProjectileType { Player, Enemy, PowerUp };
 
-
-// Base projectile class
 class CProjectile : public CGameObject
 {
 public:
-	CProjectile();
+    CProjectile();
 
 	// get projectile type
 	EProjectileType projectileType;
 
-	void SetType(EProjectileType _type);
+    // Get the collider of the projectile
+    const CCollider& GetCollider() const;
 
 	void Tick(float _deltaTime) override;
 
@@ -34,14 +34,18 @@ public:
 	// function that returns projectile type?
 	// with set speeds dmg etc, to then be used for enemies, powerups, etc.
 private:
-	// projectile direction
-	sf::Vector2f direction;
+    // Projectile direction
+    sf::Vector2f direction;
 
-	// projectile speed
-	float speed;
-	// projectile damage
-	float damage;
+    // Projectile speed
+    float speed;
 
-	//player Player;
+    // Projectile damage
+    float damage;
 
+    // Add a collider for the projectile
+    CCollider collider;
+
+    // Projectile type
+    EProjectileType projectileType;
 };

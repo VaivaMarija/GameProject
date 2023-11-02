@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "TextureBank.h"
+#include "player.h"
 #include <SFML/Window/Event.hpp>
 
 // Define the static member variable outside of the class
@@ -8,7 +9,6 @@ bool CApplication::isDead = false;
 CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWidth, unsigned int windowHeight)
     : _running(true), x(0), y(0)
 {
-    isDead = false; // Set isDead to false here
     sf::VideoMode vm;
     vm.height = windowHeight;
     vm.width = windowWidth;
@@ -41,7 +41,7 @@ void CApplication::Run()
 	Player.Load(_window.getSize());
 	Player.setPlayerPos(sf::Vector2f(800, 450));
 
-    //enemies
+    // Enemies
     Enemies.reserve(10);
     SpawnEnemy(sf::Vector2f(200, 80));
     SpawnEnemy(sf::Vector2f(x, y));
@@ -141,6 +141,23 @@ void CApplication::Run()
 			{
 				Player.decreaseHealth();
 				// You can also implement other actions like removing the enemy.
+			}
+			// Check if the player has died
+			if (Player.checkForDeath())
+			{
+				// Player has died, set the game state to "dead."
+				isDead = true;
+			}
+
+			// Handle the enemy's damage and possible removal
+			int projectileDamage = static_cast<int>(Player.GetProjectileDamage());
+			enemyShip.DecreaseHealth(projectileDamage);
+
+			// Check if the enemy has been defeated
+			if (enemyShip.IsDefeated())
+			{
+				// Handle enemy death logic
+				enemyShip.Death();
 			}
 		}
         // Update and render game objects

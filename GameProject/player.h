@@ -42,7 +42,7 @@ public:
     const CCollider& GetCollider() const {
         return collider;
     }
-
+    float GetProjectileDamage() const;
 private:
 	sf::Texture texture;
 	sf::Sprite sprite;

@@ -28,6 +28,30 @@ void enemy::Tick(float _deltaTime)
 	
 }
 
+void enemy::DecreaseHealth(float damage)
+{
+    health -= damage;
 
-//damage collision with projectile
-// 
+    // Check if health is less than or equal to 0 and handle enemy death
+    if (health <= 0)
+    {
+        Death();
+    }
+}
+
+bool enemy::IsDefeated()
+    {
+        return false;
+    }
+
+void enemy::Death()
+{
+    // Handle enemy death logic here
+    std::cout << "Enemy has been defeated!" << std::endl;
+
+    // You can add further logic here, such as playing a death animation, awarding points to the player, or removing the enemy from the game.
+
+    // For now, let's remove the enemy by setting its position off-screen.
+    setEnemyPos(sf::Vector2f(-1000, -1000)); // Move the enemy out of the visible area.
+}
+

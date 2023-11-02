@@ -117,6 +117,12 @@ void player::Tick(float _deltaTime)
 
 }
 
+float player::GetProjectileDamage() const
+{
+	return -10;
+}
+
+
 sf::Vector2f player::getPlayerPosition() const
 {
 	return sprite.getPosition();

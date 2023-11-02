@@ -21,8 +21,13 @@ public:
         return collider;
     }
 
-	int health = 50;
-	//void Death();
+    int health = 50;
+
+    // Decrease the enemy's health when hit by a projectile
+    void DecreaseHealth(float damage);
+
+    void Death();
+    bool IsDefeated();
 
 private:
 	sf::Texture texture;
