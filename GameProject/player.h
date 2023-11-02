@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Projectile.h"
+#include "ProjectilePool.h"
 #include "Weapon.h"
 #include <vector>
 #include <SFML/Graphics/Rect.hpp>
@@ -10,6 +11,8 @@ class CApplication;
 class player
 {
 public:
+	player(CProjectilePool& _projectilePool);
+
 	void renderTo(sf::RenderWindow& window);
 	void setPlayerPos(sf::Vector2f newPos);
 	void Load(sf::Vector2u _windowSize);

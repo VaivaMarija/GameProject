@@ -12,7 +12,15 @@ CProjectile::CProjectile()
 
 void CProjectile::SetType(EProjectileType _type)
 {
-	projectileType = _type;
+	projectileType = _type; // if type player = set player type for texture + dmg + fire rate + speed
+	if (projectileType == EProjectileType::Player)
+	{
+		setTexture(CTextureBank::playerProjectileT);
+	}
+	else if (projectileType == EProjectileType::Enemy)
+	{
+		setTexture(CTextureBank::enemyProjectileT);
+	}
 }
 
 void CProjectile::Tick(float _deltaTime)
