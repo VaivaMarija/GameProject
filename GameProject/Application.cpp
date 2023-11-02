@@ -63,6 +63,12 @@ void CApplication::Run()
 	SpawnEnemy(sf::Vector2f(x, y));
 	SpawnEnemy(sf::Vector2f(x, y));
 
+	//Asteroids
+	asteroids.reserve(8);
+	SpawnAsteroids(sf::Vector2f(x, y));
+	SpawnAsteroids(sf::Vector2f(x, y));
+	SpawnAsteroids(sf::Vector2f(x, y));
+	SpawnAsteroids(sf::Vector2f(x, y));
 
 	sf::Text pointsText;
 	sf::Font font;
@@ -76,7 +82,8 @@ void CApplication::Run()
 	pointsText.setCharacterSize(24);
 	//set colour
 	pointsText.setFillColor(sf::Color::White);
-	
+	pointsText.setPosition(5.f,0);
+
 	sf::Text healthText;
 	healthText.setFont(font);
 	healthText.setCharacterSize(24);
@@ -91,12 +98,19 @@ void CApplication::Run()
 	deathText.setFillColor(sf::Color::White);
 	deathText.setString(sf::String("YOU DIED"));
 
+	sf::RectangleShape healthbar1(sf::Vector2f(50.f, 10.f));
+	healthbar1.setPosition(5,35);
 
+	sf::RectangleShape healthbar2(sf::Vector2f(50.f, 10.f));
+	healthbar2.setPosition(65, 35);
+
+	sf::RectangleShape healthbar3(sf::Vector2f(50.f, 10.f));
+	healthbar3.setPosition(125, 35);
 
 	while (_running)
 	{
 		const bool wasDead = isDead;
-		
+
 		// deltaTime
 		sf::Time elapsed = clock.restart();
 		float deltaTime = elapsed.asSeconds();
@@ -106,8 +120,8 @@ void CApplication::Run()
 		}
 
 		_window.clear(sf::Color::Black);
-	
-		Player.Tick(deltaTime);		
+
+		Player.Tick(deltaTime);
 		Player.renderTo(_window);
 		// Todo: Add your game code!
 
@@ -117,15 +131,40 @@ void CApplication::Run()
 
 		//set string to display
 		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
-		
-		healthText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
+
+		//show and hide health bars based on player's health
+		switch (Player.getHealthPoints())
+		{
+		case 30:
+			healthbar1.setFillColor(sf::Color::White);
+			healthbar2.setFillColor(sf::Color::White);
+			healthbar3.setFillColor(sf::Color::White);
+			break;
+		case 20:
+			healthbar1.setFillColor(sf::Color::White);
+			healthbar2.setFillColor(sf::Color::White);
+			healthbar3.setFillColor(sf::Color::Transparent);
+			break;
+		case 10:
+			healthbar1.setFillColor(sf::Color::White);
+			healthbar2.setFillColor(sf::Color::Transparent);
+			healthbar3.setFillColor(sf::Color::Transparent);
+			break;
+		default:
+			healthbar1.setFillColor(sf::Color::Transparent);
+			healthbar2.setFillColor(sf::Color::Transparent);
+			healthbar3.setFillColor(sf::Color::Transparent);
+		}
 
 		_window.draw(pointsText);
 		_window.draw(healthText);
-		if(isDead)
+		_window.draw(healthbar1);
+		_window.draw(healthbar2);
+		_window.draw(healthbar3);
+		if (isDead)
 		{
 			_window.draw(deathText);
-			if(!wasDead)
+			if (!wasDead)
 			{
 				deathTimer.restart();
 			}
@@ -144,13 +183,8 @@ void CApplication::Run()
 			currentObject->drawTo(_window);
 		}
 
-		for(enemy& e:Enemies)
-		{
-			e.Tick(deltaTime);
-			e.renderTo(_window);
-		}
 		_window.display();
-	}
+	}	
 }
 
 
@@ -165,11 +199,23 @@ void CApplication::ProcessWindowEvent(const sf::Event& e)
 //spawns enemy at "random" location
 void CApplication::SpawnEnemy(sf::Vector2f atPosition)
 {
-	enemy& enemyRef = Enemies.emplace_back();
-	enemyRef.Load();
-	enemyRef.setEnemyPos(atPosition);
+	enemy* enemyRef = new enemy();
+	enemyRef->Load();
+	enemyRef->setPosition(atPosition);
 	x = (rand() % 1200) + 100;
-	y = (rand() % 300) + 100;
+	y = ((rand() % 300) + 100) * -1;
+	addGameObject(enemyRef);
+
+}
+
+void CApplication::SpawnAsteroids(sf::Vector2f atPosition)
+{
+	Asteroids* AsteroidRef = new Asteroids();
+	AsteroidRef->Load();
+	AsteroidRef->setPosition(atPosition);
+	x = (rand() % 1200) + 50;
+	y = ((rand() % 600) + 100) * -1;
+	addGameObject(AsteroidRef);
 }
 
 // add game objects to the game object vector
