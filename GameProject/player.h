@@ -16,7 +16,7 @@ public:
 	void Tick(float);
 	void ReadKeyboardInput();
 	int getHealthPoints();
-	void decreaseHealth();
+	void decreaseHealth(int _amount);
 	void resetHealth();
 	bool checkForDeath();
 	int getScore();
@@ -31,6 +31,7 @@ public:
 	bool LMBDown;
 	bool spaceIsDown;
 	bool debugIsDown;
+	bool restartIsDown;
 
 	void setApplication(CApplication* _application);
 
