@@ -6,6 +6,7 @@
 #include "Projectile.h"
 #include "Player.h"
 #include <SFML/System/Clock.hpp>
+#include "Asteroids.h"
 
 class CApplication
 {
@@ -13,25 +14,27 @@ public:
     CApplication(const sf::String& windowTitle, unsigned int windowWidth, unsigned int windowHeight);
     ~CApplication();
 
-    void Run();
-    player Player;
-    std::vector<enemy> Enemies;
-    void setIsDead(bool _isTrue);
-    bool getIsDead();
-    void addGameObject(CGameObject* _gameObject);
+	void Run();
+	player Player;
+	static void setIsDead(bool _isTrue);
+	bool getIsDead();
+	
+	std::vector<enemy>Enemies;
+	std::vector<Asteroids>asteroids;
+
+	void addGameObject(CGameObject* _gameObject);
 
 private:
-    void ProcessWindowEvent(const sf::Event& e);
-    void SpawnEnemy(sf::Vector2f atPosition);
+	void ProcessWindowEvent(const sf::Event& e);
+	void SpawnEnemy(sf::Vector2f atPosition);
+	void SpawnAsteroids(sf::Vector2f atPosition);
 
-    int x;
-    int y;
-    sf::RenderWindow _window;
-    bool _running;
-    static bool isDead;
+	int x;
+	int y;
+	sf::RenderWindow _window;
+	bool _running;
+	static bool isDead;
 
-    // Projectile object to be able to spawn a projectile - move to player later
-    CProjectile Projectile;
+	std::vector<CGameObject*> gameObjects;
 
-    std::vector<CGameObject*> gameObjects;
 };

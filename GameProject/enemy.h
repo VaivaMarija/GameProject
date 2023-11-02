@@ -4,13 +4,14 @@
 #include <iostream>
 #include "Collider.h"  // Include the Collider class
 
-class enemy
+#include "GameObject.h"
+class enemy : public CGameObject
 {
 public:
-    void renderTo(sf::RenderWindow& window);
-    void setEnemyPos(sf::Vector2f newPos);
-    void Load();
-    void Tick(float _deltaTime);
+
+	
+	void Load();
+	void Tick(float _deltaTime) override;
 
     // Add a CCollider member to your enemy class
     CCollider collider;
@@ -20,10 +21,10 @@ public:
         return collider;
     }
 
-    int health = 50;
-    void Death();
+	int health = 50;
+	//void Death();
 
 private:
-    sf::Texture texture;
-    sf::Sprite sprite;
+	sf::Texture texture;
+	
 };
