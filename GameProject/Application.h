@@ -14,7 +14,7 @@ public:
 	~CApplication();
 
 	void Run();
-	player Player;
+	
 	static void setIsDead(bool _isTrue);
 	bool getIsDead();
 	

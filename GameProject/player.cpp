@@ -2,6 +2,11 @@
 #include "Math.h"
 #include "Application.h"
 
+player::player(CProjectilePool& _projectilePool)
+	:	weapon(0.2f, _projectilePool)
+{
+}
+
 void player::renderTo(sf::RenderWindow& window)
 {
 	window.draw(sprite);

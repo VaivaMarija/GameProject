@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "TextureBank.h"
+#include "ProjectilePool.h"
 #include <SFML/Window/Event.hpp>
 
 bool CApplication::isDead = false;
@@ -20,7 +21,6 @@ CApplication::~CApplication()
 void CApplication::setIsDead(bool _isTrue)
 {
 	isDead = _isTrue;
-	
 }
 
 bool CApplication::getIsDead()
@@ -34,7 +34,23 @@ void CApplication::Run()
 	sf::Clock deathTimer;
 
 	sf::Event e;
+	
 
+	// textures
+	CTextureBank::loadAllTextures();
+
+	// projectile pool - player
+	CProjectilePool projectilePoolPlayer(50);
+	projectilePoolPlayer.projectileType = EProjectileType::Enemy;
+	projectilePoolPlayer.Load(this);
+	// projectile pool - enemy
+	CProjectilePool projectilePoolEnemy(50);
+	projectilePoolEnemy.projectileType = EProjectileType::Enemy;
+	projectilePoolEnemy.Load(this);
+
+
+	// player
+	player Player(projectilePoolPlayer);
 	Player.setApplication(this);
 	Player.Load(_window.getSize());
 	Player.setPlayerPos(sf::Vector2f(800, 450));
@@ -47,12 +63,6 @@ void CApplication::Run()
 	SpawnEnemy(sf::Vector2f(x, y));
 	SpawnEnemy(sf::Vector2f(x, y));
 
-
-	// projectile
-	CTextureBank::loadAllTextures();
-	CProjectile projectile;
-	projectile.setPosition(Player.getPlayerPosition());
-	addGameObject(&projectile);
 
 	sf::Text pointsText;
 	sf::Font font;
@@ -72,7 +82,6 @@ void CApplication::Run()
 	healthText.setCharacterSize(24);
 	healthText.setFillColor(sf::Color::White);
 	healthText.setPosition(0, 25);
-	
 
 	sf::Text deathText;
 	deathText.setFont(font);
@@ -81,6 +90,8 @@ void CApplication::Run()
 	deathText.setPosition(300, 250);
 	deathText.setFillColor(sf::Color::White);
 	deathText.setString(sf::String("YOU DIED"));
+
+
 
 	while (_running)
 	{
