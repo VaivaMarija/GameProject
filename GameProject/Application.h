@@ -15,10 +15,11 @@ public:
 	~CApplication();
 
 	void Run();
-	player Player;
+	
 	static void setIsDead(bool _isTrue);
 	bool getIsDead();
-	
+	void setRestart(bool _true);
+	bool getRestart();
 	std::vector<enemy>Enemies;
 	std::vector<Asteroids>asteroids;
 
@@ -33,6 +34,7 @@ private:
 	int y;
 	sf::RenderWindow _window;
 	bool _running;
+	bool restart;
 	static bool isDead;
 
 	std::vector<CGameObject*> gameObjects;

@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "TextureBank.h"
+#include "ProjectilePool.h"
 #include <SFML/Window/Event.hpp>
 
 bool CApplication::isDead = false;
@@ -20,12 +21,21 @@ CApplication::~CApplication()
 void CApplication::setIsDead(bool _isTrue)
 {
 	isDead = _isTrue;
+}
 
+void CApplication::setRestart(bool _true)
+{
+	restart = _true;
 }
 
 bool CApplication::getIsDead()
 {
 	return isDead;
+}
+
+bool CApplication::getRestart()
+{
+	return restart;
 }
 
 void CApplication::Run()
@@ -34,7 +44,23 @@ void CApplication::Run()
 	sf::Clock deathTimer;
 
 	sf::Event e;
+	
 
+	// textures
+	CTextureBank::loadAllTextures();
+
+	// projectile pool - player
+	CProjectilePool projectilePoolPlayer(50);
+	projectilePoolPlayer.projectileType = EProjectileType::Enemy;
+	projectilePoolPlayer.Load(this);
+	// projectile pool - enemy
+	CProjectilePool projectilePoolEnemy(50);
+	projectilePoolEnemy.projectileType = EProjectileType::Enemy;
+	projectilePoolEnemy.Load(this);
+
+
+	// player
+	player Player(projectilePoolPlayer);
 	Player.setApplication(this);
 	Player.Load(_window.getSize());
 	Player.setPlayerPos(sf::Vector2f(800, 450));
@@ -54,12 +80,6 @@ void CApplication::Run()
 	SpawnAsteroids(sf::Vector2f(x, y));
 	SpawnAsteroids(sf::Vector2f(x, y));
 
-	// projectile
-	CTextureBank::loadAllTextures();
-	CProjectile projectile;
-	projectile.setPosition(Player.getPlayerPosition());
-	addGameObject(&projectile);
-
 	sf::Text pointsText;
 	sf::Font font;
 	if (!font.loadFromFile("Content/Fonts/TextFont.ttf"))
@@ -72,13 +92,13 @@ void CApplication::Run()
 	pointsText.setCharacterSize(24);
 	//set colour
 	pointsText.setFillColor(sf::Color::White);
+	pointsText.setPosition(5.f, 0);
 
 	sf::Text healthText;
 	healthText.setFont(font);
 	healthText.setCharacterSize(24);
 	healthText.setFillColor(sf::Color::White);
 	healthText.setPosition(0, 25);
-
 
 	sf::Text deathText;
 	deathText.setFont(font);
@@ -87,6 +107,15 @@ void CApplication::Run()
 	deathText.setPosition(300, 250);
 	deathText.setFillColor(sf::Color::White);
 	deathText.setString(sf::String("YOU DIED"));
+
+	sf::RectangleShape healthbar1(sf::Vector2f(50.f, 10.f));
+	healthbar1.setPosition(5, 35);
+
+	sf::RectangleShape healthbar2(sf::Vector2f(50.f, 10.f));
+	healthbar2.setPosition(65, 35);
+
+	sf::RectangleShape healthbar3(sf::Vector2f(50.f, 10.f));
+	healthbar3.setPosition(125, 35);
 
 	while (_running)
 	{
@@ -113,10 +142,35 @@ void CApplication::Run()
 		//set string to display
 		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
 
-		healthText.setString(sf::String("HEALTH: ") + std::to_string(Player.getHealthPoints()));
+		//show and hide health bars based on player's health
+		switch (Player.getHealthPoints())
+		{
+		case 30:
+			healthbar1.setFillColor(sf::Color::White);
+			healthbar2.setFillColor(sf::Color::White);
+			healthbar3.setFillColor(sf::Color::White);
+			break;
+		case 20:
+			healthbar1.setFillColor(sf::Color::White);
+			healthbar2.setFillColor(sf::Color::White);
+			healthbar3.setFillColor(sf::Color::Transparent);
+			break;
+		case 10:
+			healthbar1.setFillColor(sf::Color::White);
+			healthbar2.setFillColor(sf::Color::Transparent);
+			healthbar3.setFillColor(sf::Color::Transparent);
+			break;
+		default:
+			healthbar1.setFillColor(sf::Color::Transparent);
+			healthbar2.setFillColor(sf::Color::Transparent);
+			healthbar3.setFillColor(sf::Color::Transparent);
+		}
 
 		_window.draw(pointsText);
 		_window.draw(healthText);
+		_window.draw(healthbar1);
+		_window.draw(healthbar2);
+		_window.draw(healthbar3);
 		if (isDead)
 		{
 			_window.draw(deathText);
@@ -133,6 +187,13 @@ void CApplication::Run()
 			}
 		}
 
+		if (restart)
+		{
+			Player.resetHealth();
+			Player.resetScore();
+			Player.setPlayerPos(sf::Vector2f(800, 450));
+		}
+
 		for (CGameObject* currentObject : gameObjects)
 		{
 			currentObject->Tick(deltaTime);
@@ -140,7 +201,7 @@ void CApplication::Run()
 		}
 
 		_window.display();
-	}	
+	}
 }
 
 

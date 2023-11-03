@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Projectile.h"
+#include "ProjectilePool.h"
 #include "Weapon.h"
 #include <vector>
 #include <SFML/Graphics/Rect.hpp>
@@ -10,13 +11,15 @@ class CApplication;
 class player
 {
 public:
+	player(CProjectilePool& _projectilePool);
+
 	void renderTo(sf::RenderWindow& window);
 	void setPlayerPos(sf::Vector2f newPos);
 	void Load(sf::Vector2u _windowSize);
 	void Tick(float);
 	void ReadKeyboardInput();
 	int getHealthPoints();
-	void decreaseHealth();
+	void decreaseHealth(int _amount);
 	void resetHealth();
 	bool checkForDeath();
 	int getScore();
@@ -31,6 +34,7 @@ public:
 	bool LMBDown;
 	bool spaceIsDown;
 	bool debugIsDown;
+	bool restartIsDown;
 
 	void setApplication(CApplication* _application);
 
