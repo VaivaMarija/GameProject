@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include "Application.h"
+#include "TextureBank.h"
 //#include "ProjectilePool.h"
 
 enemy::enemy(CProjectilePool& _projectilePool)
@@ -10,8 +11,7 @@ enemy::enemy(CProjectilePool& _projectilePool)
 
 void enemy::Load()
 {
-	texture.loadFromFile("Content/Textures/Enemies/enemyBlack1.png");
-	setTexture(texture);
+	setTexture(CTextureBank::enemyT);
 	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 }
 
