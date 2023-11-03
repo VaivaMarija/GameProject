@@ -8,7 +8,6 @@ class enemy : public CGameObject
 {
 public:
 
-	
 	void Load();
 	void Tick(float _deltaTime) override;
 

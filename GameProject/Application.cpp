@@ -51,7 +51,7 @@ void CApplication::Run()
 
 	// projectile pool - player
 	CProjectilePool projectilePoolPlayer(50);
-	projectilePoolPlayer.projectileType = EProjectileType::Enemy;
+	projectilePoolPlayer.projectileType = EProjectileType::Player;
 	projectilePoolPlayer.Load(this);
 	// projectile pool - enemy
 	CProjectilePool projectilePoolEnemy(50);
