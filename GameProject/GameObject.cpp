@@ -47,3 +47,13 @@ const CCollider& CGameObject::GetCollider() const
 {
     return collider;
 }
+
+CCollider& CGameObject::GetCollider()
+{
+    return collider;
+}
+
+sf::Vector2f CGameObject::GetPosition() const
+{
+    return sprite.getPosition();
+}

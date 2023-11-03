@@ -52,6 +52,6 @@ void enemy::Death()
     // You can add further logic here, such as playing a death animation, awarding points to the player, or removing the enemy from the game.
 
     // For now, let's remove the enemy by setting its position off-screen.
-    setEnemyPos(sf::Vector2f(-1000, -1000)); // Move the enemy out of the visible area.
+    setPosition(sf::Vector2f(-1000, -1000)); // Move the enemy out of the visible area.
 }
 

@@ -25,10 +25,11 @@ public:
 
     // Add this function to retrieve the collider
     const CCollider& GetCollider() const;
+    CCollider& GetCollider();
 
+    sf::Vector2f GetPosition() const;
 
 	// function that destroys the objects once they're out of screen bounds.
-
 
 protected:
     sf::Sprite sprite;

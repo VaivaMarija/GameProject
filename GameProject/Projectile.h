@@ -21,9 +21,6 @@ class CProjectile : public CGameObject
 public:
     CProjectile();
 
-	// get projectile type
-	EProjectileType projectileType;
-
     // Get the collider of the projectile
     const CCollider& GetCollider() const;
 

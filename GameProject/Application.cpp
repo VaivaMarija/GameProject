@@ -41,13 +41,13 @@ void CApplication::Run()
 	Player.Load(_window.getSize());
 	Player.setPlayerPos(sf::Vector2f(800, 450));
 
-    // Enemies
-    Enemies.reserve(10);
-    SpawnEnemy(sf::Vector2f(200, 80));
-    SpawnEnemy(sf::Vector2f(x, y));
-    SpawnEnemy(sf::Vector2f(x, y));
-    SpawnEnemy(sf::Vector2f(x, y));
-    SpawnEnemy(sf::Vector2f(x, y));
+	// Enemies
+	Enemies.reserve(10);
+	SpawnEnemy(sf::Vector2f(200, 80));
+	SpawnEnemy(sf::Vector2f(x, y));
+	SpawnEnemy(sf::Vector2f(x, y));
+	SpawnEnemy(sf::Vector2f(x, y));
+	SpawnEnemy(sf::Vector2f(x, y));
 
 	//Asteroids
 	asteroids.reserve(8);
@@ -89,6 +89,10 @@ void CApplication::Run()
 	deathText.setPosition(300, 250);
 	deathText.setFillColor(sf::Color::White);
 	deathText.setString(sf::String("YOU DIED"));
+
+	CCollider colliderA(10.0f, sf::Vector2f(0,0));
+	CCollider colliderB(10.0f, sf::Vector2f(15, 0));
+	bool colliding = colliderA.IsColliding(colliderB);
 
 	while (_running)
 	{
@@ -134,32 +138,6 @@ void CApplication::Run()
 				}
 			}
 		}
-		// Collision detection between player and enemies
-		for (enemy& enemyShip : Enemies)
-		{
-			if (Player.GetCollider().IsColliding(enemyShip.GetCollider()))
-			{
-				Player.decreaseHealth();
-				// You can also implement other actions like removing the enemy.
-			}
-			// Check if the player has died
-			if (Player.checkForDeath())
-			{
-				// Player has died, set the game state to "dead."
-				isDead = true;
-			}
-
-			// Handle the enemy's damage and possible removal
-			int projectileDamage = static_cast<int>(Player.GetProjectileDamage());
-			enemyShip.DecreaseHealth(projectileDamage);
-
-			// Check if the enemy has been defeated
-			if (enemyShip.IsDefeated())
-			{
-				// Handle enemy death logic
-				enemyShip.Death();
-			}
-		}
         // Update and render game objects
         for (CGameObject* currentObject : gameObjects)
         {
@@ -188,7 +166,7 @@ void CApplication::SpawnEnemy(sf::Vector2f atPosition)
 	x = (rand() % 1200) + 100;
 	y = ((rand() % 300) + 100) * -1;
 	addGameObject(enemyRef);
-
+	Enemies.push_back(enemyRef);
 }
 
 void CApplication::SpawnAsteroids(sf::Vector2f atPosition)
@@ -206,3 +184,5 @@ void CApplication::addGameObject(CGameObject* _gameObject)
 {
     gameObjects.push_back(_gameObject);
 }
+
+

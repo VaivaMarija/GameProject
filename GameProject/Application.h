@@ -19,7 +19,7 @@ public:
 	static void setIsDead(bool _isTrue);
 	bool getIsDead();
 	
-	std::vector<enemy>Enemies;
+	std::vector<enemy*>Enemies;
 	std::vector<Asteroids>asteroids;
 
 	void addGameObject(CGameObject* _gameObject);
