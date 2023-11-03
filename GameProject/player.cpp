@@ -42,6 +42,8 @@ void player::ReadKeyboardInput()
 
 	spaceIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space);
 
+	restartIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R);
+
 	//use sf::Mouse to check for mouse input
 	// sf::Mouse:: enum containing all buttons
 	LMBDown = sf::Mouse::isButtonPressed(sf::Mouse::Left);
@@ -52,9 +54,9 @@ int player::getHealthPoints()
 	return healthPoints;
 }
 
-void player::decreaseHealth()
+void player::decreaseHealth(int _amount)
 {
-	healthPoints = healthPoints - 10;
+	healthPoints = healthPoints - _amount;
 	CApplication::setIsDead(checkForDeath());
 }
 
@@ -117,9 +119,12 @@ void player::Tick(float _deltaTime)
 	}
 	if (debugIsDown)
 	{
-		decreaseHealth();
+		decreaseHealth(30);
 	}
-
+	if (restartIsDown)
+	{
+		application->setRestart(true);
+	}
 }
 
 sf::Vector2f player::getPlayerPosition() const

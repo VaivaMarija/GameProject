@@ -23,9 +23,19 @@ void CApplication::setIsDead(bool _isTrue)
 	isDead = _isTrue;
 }
 
+void CApplication::setRestart(bool _true)
+{
+	restart = _true;
+}
+
 bool CApplication::getIsDead()
 {
 	return isDead;
+}
+
+bool CApplication::getRestart()
+{
+	return restart;
 }
 
 void CApplication::Run()
@@ -82,7 +92,7 @@ void CApplication::Run()
 	pointsText.setCharacterSize(24);
 	//set colour
 	pointsText.setFillColor(sf::Color::White);
-	pointsText.setPosition(5.f,0);
+	pointsText.setPosition(5.f, 0);
 
 	sf::Text healthText;
 	healthText.setFont(font);
@@ -99,7 +109,7 @@ void CApplication::Run()
 	deathText.setString(sf::String("YOU DIED"));
 
 	sf::RectangleShape healthbar1(sf::Vector2f(50.f, 10.f));
-	healthbar1.setPosition(5,35);
+	healthbar1.setPosition(5, 35);
 
 	sf::RectangleShape healthbar2(sf::Vector2f(50.f, 10.f));
 	healthbar2.setPosition(65, 35);
@@ -177,6 +187,13 @@ void CApplication::Run()
 			}
 		}
 
+		if (restart)
+		{
+			Player.resetHealth();
+			Player.resetScore();
+			Player.setPlayerPos(sf::Vector2f(800, 450));
+		}
+
 		for (CGameObject* currentObject : gameObjects)
 		{
 			currentObject->Tick(deltaTime);
@@ -184,7 +201,7 @@ void CApplication::Run()
 		}
 
 		_window.display();
-	}	
+	}
 }
 
 
