@@ -24,19 +24,17 @@ void enemy::Tick(float _deltaTime)
 
 	if (sprite.getPosition().y > 950)
 	{
-		setPosition(sf::Vector2f((rand() % 1200) + 100, 0));
+		setPosition(sf::Vector2f((rand() % 1200) + 100, ((rand() % 64) + 128) * -1));
 	}
 
 	TimeUntilShoot -= _deltaTime;
-	if (TimeUntilShoot <= 0)
+	 if(TimeUntilShoot <= 0 && sprite.getPosition().y >= 0)
 	{
 		int miliUntilShoot = (rand() % 500) + 500;
 		TimeUntilShoot = static_cast<float>(miliUntilShoot) / 1000.0f;
 		weapon.Fire(_deltaTime, application, sprite.getPosition(), 180.0f);
 	}
-
-
-
+	
 	//death when health is 0
 	//if (health <= 0)
 	//{

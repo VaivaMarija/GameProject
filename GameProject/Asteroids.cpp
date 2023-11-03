@@ -15,7 +15,7 @@ void Asteroids::Tick(float _deltaTime)
 
 	if (sprite.getPosition().y > 950)
 	{
-		setPosition(sf::Vector2f((rand() % 1200) + 100, 0));
+		setPosition(sf::Vector2f((rand() % 1200) + 100, ((rand() % 64) + 512) * - 1));
 		RandomTexture();
 	}	
 	float ARSpeed = 45.0f * _deltaTime;
