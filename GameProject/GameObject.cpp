@@ -9,13 +9,9 @@ CGameObject::CGameObject()
 void CGameObject::setTexture(const sf::Texture& _texture)
 {
     sprite.setTexture(_texture);
-
-    // Set the collider's radius to be half of the sprite's width.
     float radius = sprite.getLocalBounds().width / 2;
-
-    // The position should be set in the constructor or when setting the game object's position.
-    // This ensures that the collider's position is synchronized with the sprite's position.
     collider = CCollider(radius, sprite.getPosition());
+	sprite.setTexture(_texture);
 }
 
 void CGameObject::setType(ETexture type)
@@ -25,6 +21,7 @@ void CGameObject::setType(ETexture type)
 
 void CGameObject::drawTo(sf::RenderTarget& _target)
 {
+    collider.SetPosition(sprite.getPosition());
     _target.draw(sprite);
 }
 
