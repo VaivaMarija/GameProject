@@ -27,7 +27,7 @@ public:
 
 private:
 	void ProcessWindowEvent(const sf::Event& e);
-	void SpawnEnemy(sf::Vector2f atPosition);
+	void SpawnEnemy(CProjectilePool& enemyProjectilePool);
 	void SpawnAsteroids(sf::Vector2f atPosition);
 
 	int x;

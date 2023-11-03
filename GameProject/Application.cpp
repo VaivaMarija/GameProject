@@ -67,11 +67,13 @@ void CApplication::Run()
 
 	//enemies
 	Enemies.reserve(10);
-	SpawnEnemy(sf::Vector2f(200, 80));
-	SpawnEnemy(sf::Vector2f(x, y));
-	SpawnEnemy(sf::Vector2f(x, y));
-	SpawnEnemy(sf::Vector2f(x, y));
-	SpawnEnemy(sf::Vector2f(x, y));
+
+	for(int i = 0; i < 5; i++)
+	{
+		SpawnEnemy(projectilePoolEnemy);
+	}
+	
+	
 
 	//Asteroids
 	asteroids.reserve(8);
@@ -214,15 +216,15 @@ void CApplication::ProcessWindowEvent(const sf::Event& e)
 }
 
 //spawns enemy at "random" location
-void CApplication::SpawnEnemy(sf::Vector2f atPosition)
+void CApplication::SpawnEnemy(CProjectilePool& enemyProjectilePool)
 {
-	enemy* enemyRef = new enemy();
+	enemy* enemyRef = new enemy(enemyProjectilePool);
 	enemyRef->Load();
-	enemyRef->setPosition(atPosition);
 	x = (rand() % 1200) + 100;
 	y = ((rand() % 300) + 100) * -1;
+	enemyRef->setPosition(sf::Vector2f(x, y));
 	addGameObject(enemyRef);
-
+	enemyRef->setApplication(this);
 }
 
 void CApplication::SpawnAsteroids(sf::Vector2f atPosition)
