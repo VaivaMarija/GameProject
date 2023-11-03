@@ -43,5 +43,6 @@ void Asteroids::Tick(float _deltaTime)
 		//set sprite origin to be in the centre of itself, so it rotates on the centre
 		sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 	}	
-	sprite.rotate(0.5f);
+	float ARSpeed = 45.0f * _deltaTime;
+	sprite.rotate(ARSpeed);
 }
