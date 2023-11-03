@@ -6,7 +6,6 @@
 enum class EProjectileType {Player, Enemy, PowerUp};
 
 
-// Base projectile class
 class CProjectile : public CGameObject
 {
 public:
@@ -16,9 +15,6 @@ public:
 	EProjectileType projectileType;
 
 	void SetType(EProjectileType _type);
-
-	// function that returns projectile type? getType
-	// with set speeds dmg etc, to then be used for enemies, powerups, etc.
 	
 	void Tick(float _deltaTime) override;
 

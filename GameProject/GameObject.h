@@ -23,10 +23,6 @@ public:
 
 	virtual void Tick(float _deltaTime);
 
-
-	// function that destroys the objects once they're out of screen bounds.
-
-
 protected:
 	sf::Sprite sprite;
 

@@ -15,7 +15,6 @@ public:
 	// get next available projectile
 	CProjectile& getProjectile();
 
-
 private:
 
 	// Projectile vector
