@@ -26,6 +26,12 @@ void Asteroids::Tick(float _deltaTime)
 	}	
 	float ARSpeed = 45.0f * _deltaTime;
 	sprite.rotate(ARSpeed);
+	setPosition(sprite.getPosition());
+}
+
+void Asteroids::Death()
+{
+	setPosition(sf::Vector2f((rand() % 1200) + 100, ((rand() % 64) + 128) * -1));
 }
 
 void Asteroids::RandomTexture()
@@ -52,4 +58,5 @@ void Asteroids::RandomTexture()
 
 	//set sprite origin to be in the centre of itself, so it rotates on the centre
 	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
+	collider.SetRadius(sprite.getLocalBounds().width / 2);
 }

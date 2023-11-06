@@ -30,6 +30,11 @@ float CCollider::GetRadius() const
     return radius;
 }
 
+void CCollider::SetRadius(float R)
+{
+    radius = R;
+}
+
 void CCollider::SetPosition(const sf::Vector2f& newPosition)
 {
     position = newPosition;
