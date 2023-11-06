@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Asteroids.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="ProjectilePool.cpp" />
     <ClCompile Include="CodeSamples\CodeSamples.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Asteroids.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="ProjectilePool.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="enemy.h" />

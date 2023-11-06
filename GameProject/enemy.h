@@ -29,7 +29,7 @@ public:
     // Decrease the enemy's health when hit by a projectile
     void DecreaseHealth(float damage);
 
-    void Death();
+    void Death() override;
     bool IsDefeated();
 
 

@@ -34,7 +34,7 @@ void enemy::Tick(float _deltaTime)
 		TimeUntilShoot = static_cast<float>(miliUntilShoot) / 1000.0f;
 		weapon.Fire(_deltaTime, application, sprite.getPosition(), 180.0f);
 	}
-		
+	 setPosition(sprite.getPosition());
 }
 
 void enemy::setApplication(CApplication* _application)
@@ -58,12 +58,11 @@ bool enemy::IsDefeated()
 	return false;
 }
 
-void enemy::Death()
+void enemy::Death() 
 {
 	// Handle enemy death logic here	
-	if (health <= 0)
 	{
-		std::cout << "Enemy has been defeated!" << std::endl;
+		setPosition(sf::Vector2f((rand() % 1200) + 100, ((rand() % 64) + 128) * -1));
 	}
 	//damage collision with projectile
 	// 
