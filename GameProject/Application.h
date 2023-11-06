@@ -35,7 +35,6 @@ private:
 	void SpawnEnemy(CProjectilePool& enemyProjectilePool);
 	void SpawnAsteroids(sf::Vector2f atPosition);
 
-
 	int x;
 	int y;
 	sf::RenderWindow _window;
@@ -43,7 +42,8 @@ private:
 	bool restart;
 	bool quitting;
 	static bool isDead;
-	
+
+	float superSecretPitchFloat;
 
 	std::vector<CGameObject*> gameObjects;
 

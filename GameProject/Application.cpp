@@ -4,6 +4,7 @@
 #include "ProjectilePool.h"
 #include "HealthBar.h"
 #include <SFML/Window/Event.hpp>
+#include <SFML/Audio.hpp>
 
 // Define the static member variable outside of the class
 bool CApplication::isDead = false;
@@ -58,9 +59,18 @@ void CApplication::Run()
 
 	sf::Event e;
 	
-
 	// textures
 	CTextureBank::loadAllTextures();
+
+	// Background
+	sf::Sprite backgroundSprite(CTextureBank::backgroud);
+
+	// Musique
+	sf::Music music;
+	music.openFromFile("Content/Audio/TheMusic.ogg");
+	music.setVolume(10.0f);
+	music.play();
+
 
 	// projectile pool - player
 	CProjectilePool projectilePoolPlayer(50);
@@ -132,6 +142,8 @@ void CApplication::Run()
 	quitRespawn.setFillColor(sf::Color::White);
 	quitRespawn.setString(sf::String("PRESS R TO RESTART OR Q TO QUIT"));
 
+	superSecretPitchFloat = 1.0f;
+
 	while (_running)
 	{
 		const bool wasDead = isDead;
@@ -145,6 +157,7 @@ void CApplication::Run()
 		}
 
 		_window.clear(sf::Color::Black);
+		_window.draw(backgroundSprite);
 
 		collisionManager.CheckForCollisions();
 
@@ -170,6 +183,7 @@ void CApplication::Run()
 		{
 			_window.draw(deathText);
 			_window.draw(quitRespawn);
+			music.setPitch(0.5f);
 			if (!wasDead)
 			{
 				deathTimer.restart();
@@ -183,6 +197,8 @@ void CApplication::Run()
 					Player.setPlayerPos(sf::Vector2f(800, 450));
 					CApplication::setIsDead(false);
 					CApplication::setRestart(false);
+					music.setPitch(superSecretPitchFloat);
+					superSecretPitchFloat += 0.05;
 				}
 				else if (quitting)
 				{

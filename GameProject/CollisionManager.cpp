@@ -30,6 +30,7 @@ void CollisionManager::CheckForCollisions()
 			if (playerProjectile->GetCollider().IsColliding(enemy->GetCollider()))
 			{
 				enemy->Death();
+				playerObject->addScore(1);
 			}
 		}
 		for (CGameObject* asteroid : Asteroids)

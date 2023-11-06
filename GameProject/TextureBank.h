@@ -20,6 +20,8 @@ public:
 	static sf::Texture meteorMediumT;			// texture for a medium meteor
 	static sf::Texture meteorBigT;				// texture for a big meteor
 
+	static sf::Texture backgroud;				// Kasper the friendly swede
+
 	static void loadAllTextures()
 	{
 		playerT.loadFromFile("Content/Textures/Player/playerShip1_blue.png");
@@ -37,6 +39,8 @@ public:
 		meteorSmallT.loadFromFile("Content/Textures/Meteors/meteorBrown_small2.png");
 		meteorMediumT.loadFromFile("Content/Textures/Meteors/meteorBrown_med1.png");
 		meteorBigT.loadFromFile("Content/Textures/Meteors/meteorBrown_big2.png");
+
+		backgroud.loadFromFile("Content/Textures/kasperrr.png");
 	}
 
 private:

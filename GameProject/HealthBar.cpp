@@ -17,7 +17,3 @@ void CHealthBar::renderTo(sf::RenderWindow& _window)
 	}
 }
 
-void CHealthBar::Tick(float _deltaTime)
-{
-
-}

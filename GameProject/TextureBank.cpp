@@ -15,3 +15,5 @@ sf::Texture CTextureBank::meteorTinyT;
 sf::Texture CTextureBank::meteorSmallT;
 sf::Texture CTextureBank::meteorMediumT;
 sf::Texture CTextureBank::meteorBigT;
+
+sf::Texture CTextureBank::backgroud;
