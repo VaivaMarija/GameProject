@@ -11,7 +11,7 @@ public:
 
     const sf::Vector2f& GetPosition() const;
     float GetRadius() const;
-
+    void SetRadius(float R);
     void SetPosition(const sf::Vector2f& position);
 
 private:

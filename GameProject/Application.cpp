@@ -212,13 +212,20 @@ void CApplication::Run()
 					Player.resetScore();
 					Player.setPlayerPos(sf::Vector2f(800, 450));
 					CApplication::setIsDead(false);
+					CApplication::setRestart(false);
 				}
 				else if (quitting)
 				{
 					CApplication::setIsDead(false);
+					CApplication::setQuitting(false);
 					_running = false;
 				}
 			}
+		}
+		else
+		{
+			CApplication::setQuitting(false);
+			CApplication::setRestart(false);
 		}
         // Update and render game objects
         for (CGameObject* currentObject : gameObjects)
