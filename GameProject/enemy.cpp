@@ -34,14 +34,7 @@ void enemy::Tick(float _deltaTime)
 		TimeUntilShoot = static_cast<float>(miliUntilShoot) / 1000.0f;
 		weapon.Fire(_deltaTime, application, sprite.getPosition(), 180.0f);
 	}
-	
-	//death when health is 0
-	//if (health <= 0)
-	//{
-		//Destroy GameObject.Enemy;
-	//}
-	//damage collision with projectile
-	// 
+		
 }
 
 void enemy::setApplication(CApplication* _application)
@@ -67,9 +60,13 @@ bool enemy::IsDefeated()
 
 void enemy::Death()
 {
-	// Handle enemy death logic here
-	std::cout << "Enemy has been defeated!" << std::endl;
-
+	// Handle enemy death logic here	
+	if (health <= 0)
+	{
+		std::cout << "Enemy has been defeated!" << std::endl;
+	}
+	//damage collision with projectile
+	// 
 	// You can add further logic here, such as playing a death animation, awarding points to the player, or removing the enemy from the game.
 }
 

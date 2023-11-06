@@ -76,13 +76,13 @@ void CApplication::Run()
 	}
 	
 	
-
 	//Asteroids
 	asteroids.reserve(8);
 	SpawnAsteroids(sf::Vector2f(x, y));
 	SpawnAsteroids(sf::Vector2f(x, y));
 	SpawnAsteroids(sf::Vector2f(x, y));
 	SpawnAsteroids(sf::Vector2f(x, y));
+
 
 	sf::Text pointsText;
 	sf::Font font;
@@ -239,10 +239,26 @@ void CApplication::SpawnAsteroids(sf::Vector2f atPosition)
 	addGameObject(AsteroidRef);
 }
 
+void CApplication::CheckCollision()
+{
+	CProjectile* p;
+	enemy* e;
+	
+	for(p)
+	{
+		for(enemy e)
+		{
+			if (p.GetCollider().IsColliding(e.GetCollider())
+			{
+				e.Death();
+			}
+		}
+	}
+}
+
 // add game objects to the game object vector
 void CApplication::addGameObject(CGameObject* _gameObject)
 {
     gameObjects.push_back(_gameObject);
 }
-
 
