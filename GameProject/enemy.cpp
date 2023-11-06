@@ -6,7 +6,7 @@
 enemy::enemy(CProjectilePool& _projectilePool)
 	: weapon(0.0f, _projectilePool)
 {
-
+	collisionType = ECollisionType::EnemyBody;
 }
 
 void enemy::Load()
