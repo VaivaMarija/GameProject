@@ -2,6 +2,7 @@
 #include "TextureBank.h"
 #include "player.h"
 #include "ProjectilePool.h"
+#include "HealthBar.h"
 #include <SFML/Window/Event.hpp>
 
 // Define the static member variable outside of the class
@@ -77,6 +78,7 @@ void CApplication::Run()
 	Player.Load(_window.getSize());
 	Player.setPlayerPos(sf::Vector2f(800, 450));
 	collisionManager.setPlayer(&Player);
+	CHealthBar healthBar(&Player);
 
 	// Enemies
 	Enemies.reserve(10);
@@ -86,7 +88,6 @@ void CApplication::Run()
 		SpawnEnemy(projectilePoolEnemy);
 	}
 
-	
 	//Asteroids
 	asteroids.reserve(8);
 	SpawnAsteroids(sf::Vector2f(x, y));
@@ -131,15 +132,6 @@ void CApplication::Run()
 	quitRespawn.setFillColor(sf::Color::White);
 	quitRespawn.setString(sf::String("PRESS R TO RESTART OR Q TO QUIT"));
 
-	sf::RectangleShape healthbar1(sf::Vector2f(50.f, 10.f));
-	healthbar1.setPosition(5, 35);
-
-	sf::RectangleShape healthbar2(sf::Vector2f(50.f, 10.f));
-	healthbar2.setPosition(65, 35);
-
-	sf::RectangleShape healthbar3(sf::Vector2f(50.f, 10.f));
-	healthbar3.setPosition(125, 35);
-
 	while (_running)
 	{
 		const bool wasDead = isDead;
@@ -167,35 +159,13 @@ void CApplication::Run()
 		//set string to display
 		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
 
-		//show and hide health bars based on player's health
-		switch (Player.getHealthPoints())
-		{
-		case 30:
-			healthbar1.setFillColor(sf::Color::White);
-			healthbar2.setFillColor(sf::Color::White);
-			healthbar3.setFillColor(sf::Color::White);
-			break;
-		case 20:
-			healthbar1.setFillColor(sf::Color::White);
-			healthbar2.setFillColor(sf::Color::White);
-			healthbar3.setFillColor(sf::Color::Transparent);
-			break;
-		case 10:
-			healthbar1.setFillColor(sf::Color::White);
-			healthbar2.setFillColor(sf::Color::Transparent);
-			healthbar3.setFillColor(sf::Color::Transparent);
-			break;
-		default:
-			healthbar1.setFillColor(sf::Color::Transparent);
-			healthbar2.setFillColor(sf::Color::Transparent);
-			healthbar3.setFillColor(sf::Color::Transparent);
-		}
 
 		_window.draw(pointsText);
 		_window.draw(healthText);
-		_window.draw(healthbar1);
-		_window.draw(healthbar2);
-		_window.draw(healthbar3);
+
+		//draw the health bar
+		healthBar.renderTo(_window);
+
 		if (isDead)
 		{
 			_window.draw(deathText);

@@ -14,7 +14,6 @@ void CollisionManager::AddGameObject(CGameObject* gameObject)
 	{
 		Asteroids.push_back(gameObject);
 	}
-}
 	if (gameObject->GetCollisionType() == ECollisionType::EnemyProjectile)
 	{
 		EnemyProjectiles.push_back(gameObject);
@@ -41,14 +40,22 @@ void CollisionManager::CheckForCollisions()
 			}
 		}
 	}
-
 	// loop for enemy projectiles + player
 	for (CGameObject* enemyProjectile : EnemyProjectiles)
 	{
 		if (enemyProjectile->GetCollider().IsColliding(playerObject->GetCollider()))
 		{
 			enemyProjectile->setPosition(sf::Vector2f(10000.0f, 10000.0f));
-			playerObject->decreaseHealth(5);
+			playerObject->decreaseHealth(2);
+		}
+	}
+	// loop for asteroids + player
+	for (CGameObject* asteroid : Asteroids)
+	{
+		if (playerObject->GetCollider().IsColliding(asteroid->GetCollider()))
+		{
+			asteroid->Death();
+			playerObject->decreaseHealth(1);
 		}
 	}
 }

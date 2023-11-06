@@ -29,7 +29,7 @@ void player::Load(sf::Vector2u _windowSize)
 	//set sprite origin to be in the centre of itself, so it rotates on the centre
 	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 	collider = CCollider(sprite.getGlobalBounds().width / 2, getPlayerPosition());
-	healthPoints = 30;
+	resetHealth();
 }
 
 void player::ReadKeyboardInput()
@@ -64,7 +64,7 @@ void player::decreaseHealth(int _amount)
 
 void player::resetHealth()
 {
-	healthPoints = 30;
+	healthPoints = 10;
 }
 
 bool player::checkForDeath()
