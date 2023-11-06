@@ -84,15 +84,15 @@ void CApplication::Run()
 	{
 		SpawnEnemy(projectilePoolEnemy);
 	}
-	
-	
 
+	
 	//Asteroids
 	asteroids.reserve(8);
 	SpawnAsteroids(sf::Vector2f(x, y));
 	SpawnAsteroids(sf::Vector2f(x, y));
 	SpawnAsteroids(sf::Vector2f(x, y));
 	SpawnAsteroids(sf::Vector2f(x, y));
+
 
 	sf::Text pointsText;
 	sf::Font font;
@@ -152,6 +152,8 @@ void CApplication::Run()
 		}
 
 		_window.clear(sf::Color::Black);
+
+		collisionManager.CheckForCollisions();
 
 		Player.Tick(deltaTime);
 		Player.renderTo(_window);
@@ -267,10 +269,11 @@ void CApplication::SpawnAsteroids(sf::Vector2f atPosition)
 }
 
 
+
 // add game objects to the game object vector
 void CApplication::addGameObject(CGameObject* _gameObject)
 {
     gameObjects.push_back(_gameObject);
+	collisionManager.AddGameObject(_gameObject);
 }
-
 

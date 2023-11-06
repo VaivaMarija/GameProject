@@ -38,6 +38,15 @@ void CGameObject::setPosition(sf::Vector2f _position)
     collider.SetPosition(_position);
 }
 
+void CGameObject::Death()
+{
+}
+
+ECollisionType CGameObject::GetCollisionType() const
+{
+    return collisionType;
+}
+
 // Implement the GetCollider function as mentioned in previous responses.
 
 const CCollider& CGameObject::GetCollider() const

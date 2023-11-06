@@ -25,6 +25,10 @@ public:
 
     void setPosition(sf::Vector2f _position);
 
+    virtual void Death();
+
+    ECollisionType GetCollisionType() const;
+
     virtual void Tick(float _deltaTime);
 
     // Add this function to retrieve the collider

@@ -7,9 +7,12 @@
 #include "Player.h"
 #include <SFML/System/Clock.hpp>
 #include "Asteroids.h"
+#include "CollisionManager.h"
+
 
 class CApplication
 {
+	
 public:
     CApplication(const sf::String& windowTitle, unsigned int windowWidth, unsigned int windowHeight);
     ~CApplication();
@@ -32,6 +35,7 @@ private:
 	void SpawnEnemy(CProjectilePool& enemyProjectilePool);
 	void SpawnAsteroids(sf::Vector2f atPosition);
 
+
 	int x;
 	int y;
 	sf::RenderWindow _window;
@@ -42,5 +46,7 @@ private:
 	
 
 	std::vector<CGameObject*> gameObjects;
+
+	CollisionManager collisionManager;
 
 };
