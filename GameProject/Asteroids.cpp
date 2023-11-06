@@ -3,11 +3,7 @@
 
 void Asteroids::Load()
 {
-	texture.loadFromFile("Content/Textures/Meteors/MeteorBrown_med1.png");
-	sprite.setTexture(texture);
-
-	//set sprite origin to be in the centre of itself, so it rotates on the centre
-	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
+	RandomTexture();
 }
 
 void Asteroids::Tick(float _deltaTime)
@@ -19,29 +15,35 @@ void Asteroids::Tick(float _deltaTime)
 
 	if (sprite.getPosition().y > 950)
 	{
-		setPosition(sf::Vector2f((rand() % 1200) + 100, 0));
-
-		int randomTextureA = rand() % 4;
-
-		if (randomTextureA == 0)
-		{
-			sprite.setTexture(CTextureBank::meteorBigT, true);
-		}
-		if (randomTextureA == 1)
-		{
-			sprite.setTexture(CTextureBank::meteorMediumT, true);
-		}
-		if (randomTextureA == 2)
-		{
-			sprite.setTexture(CTextureBank::meteorSmallT, true);
-		}
-		if (randomTextureA == 3)
-		{
-			sprite.setTexture(CTextureBank::meteorTinyT, true);
-		}
-
-		//set sprite origin to be in the centre of itself, so it rotates on the centre
-		sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
+		setPosition(sf::Vector2f((rand() % 1200) + 100, ((rand() % 64) + 512) * - 1));
+		RandomTexture();
 	}	
-	sprite.rotate(0.5f);
+	float ARSpeed = 45.0f * _deltaTime;
+	sprite.rotate(ARSpeed);
+}
+
+void Asteroids::RandomTexture()
+{
+
+	int randomTextureA = rand() % 4;
+
+	if (randomTextureA == 0)
+	{
+		sprite.setTexture(CTextureBank::meteorBigT, true);
+	}
+	if (randomTextureA == 1)
+	{
+		sprite.setTexture(CTextureBank::meteorMediumT, true);
+	}
+	if (randomTextureA == 2)
+	{
+		sprite.setTexture(CTextureBank::meteorSmallT, true);
+	}
+	if (randomTextureA == 3)
+	{
+		sprite.setTexture(CTextureBank::meteorTinyT, true);
+	}
+
+	//set sprite origin to be in the centre of itself, so it rotates on the centre
+	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 }

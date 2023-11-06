@@ -9,10 +9,10 @@ enum class EProjectileType {Player, Enemy, PowerUp};
 class CProjectile : public CGameObject
 {
 public:
-	CProjectile();
+    CProjectile();
 
-	// get projectile type
-	EProjectileType projectileType;
+    // Get the collider of the projectile
+    const CCollider& GetCollider() const;
 
 	void SetType(EProjectileType _type);
 	
@@ -21,12 +21,15 @@ public:
 	void setDirection(sf::Vector2f _direction);
 
 private:
-	// projectile direction
-	sf::Vector2f direction;
+    EProjectileType projectileType;
 
-	// projectile speed
-	float speed;
-	// projectile damage
-	float damage;
+    // Projectile direction
+    sf::Vector2f direction;
+
+    // Projectile speed
+    float speed;
+
+    // Projectile damage
+    float damage;
 
 };

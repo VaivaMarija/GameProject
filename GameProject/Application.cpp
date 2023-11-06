@@ -1,17 +1,19 @@
 #include "Application.h"
 #include "TextureBank.h"
+#include "player.h"
 #include "ProjectilePool.h"
 #include <SFML/Window/Event.hpp>
 
+// Define the static member variable outside of the class
 bool CApplication::isDead = false;
 
 CApplication::CApplication(const sf::String& windowTitle, unsigned int windowWidth, unsigned int windowHeight)
-	: _running(true)
+    : _running(true), x(0), y(0)
 {
-	sf::VideoMode vm;
-	vm.height = windowHeight;
-	vm.width = windowWidth;
-	_window.create(vm, windowTitle);
+    sf::VideoMode vm;
+    vm.height = windowHeight;
+    vm.width = windowWidth;
+    _window.create(vm, windowTitle);
 }
 
 CApplication::~CApplication()
@@ -65,13 +67,15 @@ void CApplication::Run()
 	Player.Load(_window.getSize());
 	Player.setPlayerPos(sf::Vector2f(800, 450));
 
-	//enemies
+	// Enemies
 	Enemies.reserve(10);
-	SpawnEnemy(sf::Vector2f(200, 80));
-	SpawnEnemy(sf::Vector2f(x, y));
-	SpawnEnemy(sf::Vector2f(x, y));
-	SpawnEnemy(sf::Vector2f(x, y));
-	SpawnEnemy(sf::Vector2f(x, y));
+
+	for(int i = 0; i < 5; i++)
+	{
+		SpawnEnemy(projectilePoolEnemy);
+	}
+	
+	
 
 	//Asteroids
 	asteroids.reserve(8);
@@ -193,12 +197,12 @@ void CApplication::Run()
 			Player.resetScore();
 			Player.setPlayerPos(sf::Vector2f(800, 450));
 		}
-
-		for (CGameObject* currentObject : gameObjects)
-		{
-			currentObject->Tick(deltaTime);
-			currentObject->drawTo(_window);
-		}
+        // Update and render game objects
+        for (CGameObject* currentObject : gameObjects)
+        {
+            currentObject->Tick(deltaTime);
+            currentObject->drawTo(_window);
+        }
 
 		_window.display();
 	}
@@ -207,22 +211,22 @@ void CApplication::Run()
 
 void CApplication::ProcessWindowEvent(const sf::Event& e)
 {
-	if (e.type == sf::Event::Closed)
-	{
-		_running = false;
-	}
+    if (e.type == sf::Event::Closed)
+    {
+        _running = false;
+    }
 }
 
 //spawns enemy at "random" location
-void CApplication::SpawnEnemy(sf::Vector2f atPosition)
+void CApplication::SpawnEnemy(CProjectilePool& enemyProjectilePool)
 {
-	enemy* enemyRef = new enemy();
+	enemy* enemyRef = new enemy(enemyProjectilePool);
 	enemyRef->Load();
-	enemyRef->setPosition(atPosition);
 	x = (rand() % 1200) + 100;
 	y = ((rand() % 300) + 100) * -1;
+	enemyRef->setPosition(sf::Vector2f(x, y));
 	addGameObject(enemyRef);
-
+	enemyRef->setApplication(this);
 }
 
 void CApplication::SpawnAsteroids(sf::Vector2f atPosition)
@@ -238,5 +242,7 @@ void CApplication::SpawnAsteroids(sf::Vector2f atPosition)
 // add game objects to the game object vector
 void CApplication::addGameObject(CGameObject* _gameObject)
 {
-	gameObjects.push_back(_gameObject);
+    gameObjects.push_back(_gameObject);
 }
+
+

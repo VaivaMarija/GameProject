@@ -4,6 +4,7 @@
 #include "ProjectilePool.h"
 #include "Weapon.h"
 #include <vector>
+#include "Collider.h"  // Include the Collider class
 #include <SFML/Graphics/Rect.hpp>
 
 class CApplication;
@@ -26,7 +27,7 @@ public:
 	void addScore(int _scoreToAdd);
 	void resetScore();
 
-	sf::Vector2f getPlayerPosition() const; 
+    sf::Vector2f getPlayerPosition() const; // move to the thing later
 
 	bool wIsDown;
 	bool aIsDown;
@@ -36,8 +37,16 @@ public:
 	bool debugIsDown;
 	bool restartIsDown;
 
-	void setApplication(CApplication* _application);
+    void setApplication(CApplication* _application);
 
+    // Add a CCollider member to your player class
+    CCollider collider;
+
+    // Implement the GetCollider method
+    const CCollider& GetCollider() const {
+        return collider;
+    }
+    float GetProjectileDamage() const;
 private:
 	sf::Texture texture;
 	sf::Sprite sprite;

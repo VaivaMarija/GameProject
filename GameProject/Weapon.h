@@ -16,6 +16,6 @@ public:
 private:
 	float fireRate;
 	float timeSinceLastShot;
-
+	
 	CProjectilePool* projectilePool;
 };

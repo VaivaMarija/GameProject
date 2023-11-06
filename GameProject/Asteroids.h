@@ -13,13 +13,13 @@ public:
 	
 	void Load();
 	void Tick(float _deltaTime) override;
-
+	
 
 	int health = 10;
 
 
 private:
 	sf::Texture texture;
-	
+	void RandomTexture();
 };
 
