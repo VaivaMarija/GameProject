@@ -1,6 +1,12 @@
 #include "Asteroids.h"
 #include "TextureBank.h"
 
+
+Asteroids::Asteroids()
+{
+	collisionType = ECollisionType::Asteroid;
+}
+
 void Asteroids::Load()
 {
 	RandomTexture();

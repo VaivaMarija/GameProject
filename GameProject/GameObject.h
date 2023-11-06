@@ -3,9 +3,12 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
-#include "Collider.h"  // Include your Collider class
+#include "Collider.h"
 
-enum class ETexture { Player, Enemy, Meteor };
+enum class ETexture { Player, Enemy, Asteroid };
+
+enum class ECollisionType { PlayerBody, EnemyBody, Asteroid, PlayerProjectile, EnemyProjectile };
+
 
 class CGameObject
 {
@@ -13,6 +16,7 @@ public:
     CGameObject();
 
     ETexture textureType;
+    
     void setType(ETexture type);
 
     void setTexture(const sf::Texture& _texture);
@@ -34,6 +38,6 @@ public:
 protected:
     sf::Sprite sprite;
     CCollider collider;  // Add a collider member
-
+    ECollisionType collisionType;
 private:
 };
