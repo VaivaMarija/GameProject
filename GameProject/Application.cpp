@@ -40,6 +40,16 @@ bool CApplication::getRestart()
 	return restart;
 }
 
+void CApplication::setQuitting(bool _true)
+{
+	quitting = _true;
+}
+
+bool CApplication::getQuitting()
+{
+	return quitting;
+}
+
 void CApplication::Run()
 {
 	sf::Clock clock;
@@ -184,18 +194,18 @@ void CApplication::Run()
 			}
 			else
 			{
-				if (deathTimer.getElapsedTime().asSeconds() > 3)
+				if (restart)
+				{
+					Player.resetHealth();
+					Player.resetScore();
+					Player.setPlayerPos(sf::Vector2f(800, 450));
+					CApplication::setIsDead(false);
+				}
+				else if (quitting)
 				{
 					_running = false;
 				}
 			}
-		}
-
-		if (restart)
-		{
-			Player.resetHealth();
-			Player.resetScore();
-			Player.setPlayerPos(sf::Vector2f(800, 450));
 		}
         // Update and render game objects
         for (CGameObject* currentObject : gameObjects)
