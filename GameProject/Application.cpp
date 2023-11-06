@@ -249,6 +249,7 @@ void CApplication::SpawnAsteroids(sf::Vector2f atPosition)
 	addGameObject(AsteroidRef);
 }
 
+
 // add game objects to the game object vector
 void CApplication::addGameObject(CGameObject* _gameObject)
 {

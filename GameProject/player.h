@@ -9,7 +9,7 @@
 
 class CApplication;
 
-class player
+class player // make into a game object
 {
 public:
 	player(CProjectilePool& _projectilePool);
@@ -53,6 +53,8 @@ private:
 	sf::Sprite sprite;
 	int healthPoints;
 	int score;
+
+	ECollisionType collisionType;
 
 	sf::FloatRect windowRectangle;
 	CApplication* application;

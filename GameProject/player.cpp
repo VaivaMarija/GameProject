@@ -5,6 +5,7 @@
 player::player(CProjectilePool& _projectilePool)
 	:	weapon(0.2f, _projectilePool)
 {
+	collisionType = ECollisionType::PlayerBody;
 }
 
 void player::renderTo(sf::RenderWindow& window)

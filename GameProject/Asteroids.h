@@ -9,7 +9,7 @@
 class Asteroids :  public CGameObject
 {
 public:
-
+	Asteroids();
 	
 	void Load();
 	void Tick(float _deltaTime) override;
