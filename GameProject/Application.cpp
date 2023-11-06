@@ -122,6 +122,14 @@ void CApplication::Run()
 	deathText.setFillColor(sf::Color::White);
 	deathText.setString(sf::String("YOU DIED"));
 
+	sf::Text quitRespawn;
+	quitRespawn.setFont(font);
+	quitRespawn.setCharacterSize(60);
+	quitRespawn.setOrigin(quitRespawn.getGlobalBounds().width / 2, quitRespawn.getGlobalBounds().height / 2);
+	quitRespawn.setPosition(325, 500);
+	quitRespawn.setFillColor(sf::Color::White);
+	quitRespawn.setString(sf::String("PRESS R TO RESTART OR Q TO QUIT"));
+
 	sf::RectangleShape healthbar1(sf::Vector2f(50.f, 10.f));
 	healthbar1.setPosition(5, 35);
 
@@ -188,6 +196,7 @@ void CApplication::Run()
 		if (isDead)
 		{
 			_window.draw(deathText);
+			_window.draw(quitRespawn);
 			if (!wasDead)
 			{
 				deathTimer.restart();
@@ -203,6 +212,7 @@ void CApplication::Run()
 				}
 				else if (quitting)
 				{
+					CApplication::setIsDead(false);
 					_running = false;
 				}
 			}
