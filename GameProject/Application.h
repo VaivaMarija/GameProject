@@ -23,6 +23,8 @@ public:
 	bool getIsDead();
 	void setRestart(bool _true);
 	bool getRestart();
+	void setQuitting(bool _true);
+	bool getQuitting();
 	std::vector<enemy>Enemies;
 	std::vector<Asteroids>asteroids;
 
@@ -39,7 +41,9 @@ private:
 	sf::RenderWindow _window;
 	bool _running;
 	bool restart;
+	bool quitting;
 	static bool isDead;
+	
 
 	std::vector<CGameObject*> gameObjects;
 

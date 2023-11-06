@@ -32,6 +32,7 @@ public:
 	bool wIsDown;
 	bool aIsDown;
 	bool dIsDown;
+	bool qIsDown;
 	bool LMBDown;
 	bool spaceIsDown;
 	bool debugIsDown;

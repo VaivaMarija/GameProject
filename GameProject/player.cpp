@@ -39,6 +39,7 @@ void player::ReadKeyboardInput()
 	wIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W);
 	aIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A);
 	dIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D);
+	qIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q);
 	debugIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::O);
 
 	spaceIsDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space);
@@ -112,6 +113,11 @@ void player::Tick(float _deltaTime)
 	{
 		//rotate player left
 		sprite.rotate(150.0f * _deltaTime);
+	}
+	if (qIsDown)
+	{
+		//quit game
+		application->setQuitting(true);
 	}
 	if (spaceIsDown)
 	{

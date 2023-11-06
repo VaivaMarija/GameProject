@@ -40,6 +40,16 @@ bool CApplication::getRestart()
 	return restart;
 }
 
+void CApplication::setQuitting(bool _true)
+{
+	quitting = _true;
+}
+
+bool CApplication::getQuitting()
+{
+	return quitting;
+}
+
 void CApplication::Run()
 {
 	sf::Clock clock;
@@ -112,6 +122,14 @@ void CApplication::Run()
 	deathText.setFillColor(sf::Color::White);
 	deathText.setString(sf::String("YOU DIED"));
 
+	sf::Text quitRespawn;
+	quitRespawn.setFont(font);
+	quitRespawn.setCharacterSize(60);
+	quitRespawn.setOrigin(quitRespawn.getGlobalBounds().width / 2, quitRespawn.getGlobalBounds().height / 2);
+	quitRespawn.setPosition(325, 500);
+	quitRespawn.setFillColor(sf::Color::White);
+	quitRespawn.setString(sf::String("PRESS R TO RESTART OR Q TO QUIT"));
+
 	sf::RectangleShape healthbar1(sf::Vector2f(50.f, 10.f));
 	healthbar1.setPosition(5, 35);
 
@@ -180,24 +198,26 @@ void CApplication::Run()
 		if (isDead)
 		{
 			_window.draw(deathText);
+			_window.draw(quitRespawn);
 			if (!wasDead)
 			{
 				deathTimer.restart();
 			}
 			else
 			{
-				if (deathTimer.getElapsedTime().asSeconds() > 3)
+				if (restart)
 				{
+					Player.resetHealth();
+					Player.resetScore();
+					Player.setPlayerPos(sf::Vector2f(800, 450));
+					CApplication::setIsDead(false);
+				}
+				else if (quitting)
+				{
+					CApplication::setIsDead(false);
 					_running = false;
 				}
 			}
-		}
-
-		if (restart)
-		{
-			Player.resetHealth();
-			Player.resetScore();
-			Player.setPlayerPos(sf::Vector2f(800, 450));
 		}
         // Update and render game objects
         for (CGameObject* currentObject : gameObjects)
