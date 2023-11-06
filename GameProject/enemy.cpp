@@ -19,7 +19,6 @@ void enemy::Tick(float _deltaTime)
 	}
 	
 
-
 	//death when health is 0
 	//if (health <= 0)
 	//{

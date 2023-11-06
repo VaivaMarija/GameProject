@@ -19,4 +19,3 @@ private:
 	sf::Texture texture;
 	
 };
-
