@@ -76,6 +76,7 @@ void CApplication::Run()
 	Player.setApplication(this);
 	Player.Load(_window.getSize());
 	Player.setPlayerPos(sf::Vector2f(800, 450));
+	collisionManager.setPlayer(&Player);
 
 	// Enemies
 	Enemies.reserve(10);

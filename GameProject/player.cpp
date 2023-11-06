@@ -1,6 +1,7 @@
 #include "player.h"
 #include "Math.h"
 #include "Application.h"
+#include "TextureBank.h"
 
 player::player(CProjectilePool& _projectilePool)
 	:	weapon(0.2f, _projectilePool)
@@ -22,13 +23,12 @@ void player::Load(sf::Vector2u _windowSize)
 {
 	windowRectangle.width = _windowSize.x;
 	windowRectangle.height = _windowSize.y;
-	//load texture
-	texture.loadFromFile("Content/Textures/Player/playerShip1_blue.png");
-	//add texture to sprite
-	sprite.setTexture(texture);
+
+	//set texture to sprite
+	sprite.setTexture(CTextureBank::playerT, true);
 	//set sprite origin to be in the centre of itself, so it rotates on the centre
 	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
-	
+	collider = CCollider(sprite.getGlobalBounds().width / 2, getPlayerPosition());
 	healthPoints = 30;
 }
 
@@ -132,6 +132,8 @@ void player::Tick(float _deltaTime)
 	{
 		application->setRestart(true);
 	}
+
+	collider.SetPosition(sprite.getPosition());
 }
 
 float player::GetProjectileDamage() const
