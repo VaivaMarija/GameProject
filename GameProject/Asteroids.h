@@ -13,6 +13,7 @@ public:
 	
 	void Load();
 	void Tick(float _deltaTime) override;
+	void Respawn() override;
 	void Death() override;
 
 	int health = 10;

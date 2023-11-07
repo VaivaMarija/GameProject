@@ -21,10 +21,14 @@ void CollisionManager::AddGameObject(CGameObject* gameObject)
 }
 
 void CollisionManager::CheckForCollisions()
-{	
+{
 	// loop for player projectiles + enemies
 	for (CGameObject* playerProjectile:PlayerProjectiles)
 	{
+		if (playerProjectile->isExploding)
+		{
+			continue;
+		}
 		for (CGameObject* enemy:Enemies)
 		{
 			if (playerProjectile->GetCollider().IsColliding(enemy->GetCollider()))
@@ -44,15 +48,24 @@ void CollisionManager::CheckForCollisions()
 	// loop for enemy projectiles + player
 	for (CGameObject* enemyProjectile : EnemyProjectiles)
 	{
+		if (enemyProjectile->isExploding)
+		{
+			continue;
+		}
 		if (enemyProjectile->GetCollider().IsColliding(playerObject->GetCollider()))
 		{
-			enemyProjectile->setPosition(sf::Vector2f(10000.0f, 10000.0f));
+			enemyProjectile->SetKaboom(CTextureBank::enemyProjectileHitT);
 			playerObject->decreaseHealth(2);
 		}
 	}
 	// loop for asteroids + player
 	for (CGameObject* asteroid : Asteroids)
 	{
+		if (asteroid->isExploding)
+		{
+			continue;
+		}
+
 		if (playerObject->GetCollider().IsColliding(asteroid->GetCollider()))
 		{
 			asteroid->Death();

@@ -5,6 +5,7 @@
 #include "HealthBar.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Audio.hpp>
+#include "SoundBank.h"
 
 // Define the static member variable outside of the class
 bool CApplication::isDead = false;
@@ -65,7 +66,7 @@ void CApplication::Run()
 	// Background
 	sf::Sprite backgroundSprite(CTextureBank::backgroudT);
 
-	// Musique
+	// Musique background
 	sf::Music music;
 	music.openFromFile("Content/Audio/TheMusic.ogg");
 	music.setVolume(10.0f);
@@ -161,13 +162,12 @@ void CApplication::Run()
 
 		collisionManager.CheckForCollisions();
 
-		Player.Tick(deltaTime);
+		if (!isDead)
+		{
+			Player.Tick(deltaTime);
+		}
 		Player.renderTo(_window);
-		// Todo: Add your game code!
-
-		// Todo: Add your game code!
-		Player.renderTo(_window);
-
+		
 
 		//set string to display
 		pointsText.setString(sf::String("POINTS: ") + std::to_string(Player.getScore()));
@@ -186,11 +186,12 @@ void CApplication::Run()
 			music.setPitch(0.5f);
 			if (!wasDead)
 			{
+				CSoundBank::GetInstance().gameOverS.play();
 				deathTimer.restart();
 			}
 			else
 			{
-				if (restart)
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R))
 				{
 					Player.resetHealth();
 					Player.resetScore();
@@ -200,7 +201,7 @@ void CApplication::Run()
 					music.setPitch(superSecretPitchFloat);
 					superSecretPitchFloat += 0.05;
 				}
-				else if (quitting)
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
 				{
 					CApplication::setIsDead(false);
 					CApplication::setQuitting(false);
@@ -216,10 +217,12 @@ void CApplication::Run()
         // Update and render game objects
         for (CGameObject* currentObject : gameObjects)
         {
-            currentObject->Tick(deltaTime);
+			if (!isDead)
+			{
+				currentObject->DoTick(deltaTime);
+			}
             currentObject->drawTo(_window);
         }
-
 		_window.display();
 	}
 }

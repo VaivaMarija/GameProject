@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics/Texture.hpp>
 
+#define LOAD_TEXTURE(texture, path) texture.loadFromFile( path ); texture.setSmooth(true);
+
 class CTextureBank
 {
 public:
@@ -29,26 +31,27 @@ public:
 
 	static void loadAllTextures()
 	{
-		playerT.loadFromFile("Content/Textures/Player/playerShip1_blue.png");
-		playerProjectileT.loadFromFile("Content/Textures/Lasers/laserBlue.png");
-		playerProjectileHitT.loadFromFile("Content/Textures/Lasers/laserBlue_hit.png");
+		LOAD_TEXTURE(playerT, "Content/Textures/Player/playerShip1_blue.png");
 
-		playerPowerT.loadFromFile("Content/Textures/Lasers/laserGreen.png");
-		playerPowerHitT.loadFromFile("Content/Textures/Lasers/laserGreen_hit.png");
+		LOAD_TEXTURE(playerProjectileT, "Content/Textures/Lasers/laserBlue.png");
+		LOAD_TEXTURE(playerProjectileHitT, "Content/Textures/Lasers/laserBlue_hit.png");
 
-		enemyT.loadFromFile("Content/Textures/Enemies/enemyBlack1.png");
-		enemyProjectileT.loadFromFile("Content/Textures/Lasers/laserRed.png");
-		enemyProjectileHitT.loadFromFile("Content/Textures/Lasers/laserRed_hit.png");
+		LOAD_TEXTURE(playerPowerT, "Content/Textures/Lasers/laserGreen.png");
+		LOAD_TEXTURE(playerPowerHitT, "Content/Textures/Lasers/laserGreen_hit.png");
 
-		meteorTinyT.loadFromFile("Content/Textures/Meteors/meteorBrown_tiny2.png");
-		meteorSmallT.loadFromFile("Content/Textures/Meteors/meteorBrown_small2.png");
-		meteorMediumT.loadFromFile("Content/Textures/Meteors/meteorBrown_med1.png");
-		meteorBigT.loadFromFile("Content/Textures/Meteors/meteorBrown_big2.png");
+		LOAD_TEXTURE(enemyT, "Content/Textures/Enemies/enemyBlack1.png");
+		LOAD_TEXTURE(enemyProjectileT, "Content/Textures/Lasers/laserRed.png");
+		LOAD_TEXTURE(enemyProjectileHitT, "Content/Textures/Lasers/laserRed_hit.png");
 
-		playerHitT.loadFromFile("Content/Textures/Lasers/laserBlue_hit.png");
-		enemyHitT.loadFromFile("Content/Textures/Lasers/laserRed_hit.png");
+		LOAD_TEXTURE(meteorTinyT, "Content/Textures/Meteors/meteorBrown_tiny2.png");
+		LOAD_TEXTURE(meteorSmallT, "Content/Textures/Meteors/meteorBrown_small2.png");
+		LOAD_TEXTURE(meteorMediumT, "Content/Textures/Meteors/meteorBrown_med1.png");
+		LOAD_TEXTURE(meteorBigT, "Content/Textures/Meteors/meteorBrown_big2.png");
 
-		backgroudT.loadFromFile("Content/Textures/kasperrr.png");
+		LOAD_TEXTURE(playerHitT, "Content/Textures/Lasers/laserBlue_hit.png");
+		LOAD_TEXTURE(enemyHitT,"Content/Textures/Lasers/laserRed_hit.png");
+
+		LOAD_TEXTURE(backgroudT, "Content/Textures/kasperrr.png");
 	}
 
 private:

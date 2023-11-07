@@ -2,6 +2,7 @@
 #include "Math.h"
 #include "Application.h"
 #include "TextureBank.h"
+#include "SoundBank.h"
 
 player::player(CProjectilePool& _projectilePool)
 	:	weapon(0.2f, _projectilePool)
@@ -59,6 +60,7 @@ int player::getHealthPoints()
 void player::decreaseHealth(int _amount)
 {
 	healthPoints = healthPoints - _amount;
+	CSoundBank::GetInstance().enemyHitS.play();
 	CApplication::setIsDead(checkForDeath());
 }
 

@@ -20,6 +20,10 @@ public:
 
 	void setDirection(sf::Vector2f _direction);
 
+    void Death() override;
+
+    void Respawn() override;
+
 private:
     EProjectileType projectileType;
 

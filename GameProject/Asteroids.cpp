@@ -29,9 +29,15 @@ void Asteroids::Tick(float _deltaTime)
 	setPosition(sprite.getPosition());
 }
 
-void Asteroids::Death()
+void Asteroids::Respawn()
 {
 	setPosition(sf::Vector2f((rand() % 1200) + 100, ((rand() % 64) + 128) * -1));
+	RandomTexture();
+}
+
+void Asteroids::Death()
+{	
+	SetKaboom(CTextureBank::playerHitT);
 }
 
 void Asteroids::RandomTexture()

@@ -37,3 +37,14 @@ void CProjectile::setDirection(sf::Vector2f _direction)
 	sprite.setRotation(math::RadToDeg(rotation));
 	direction = _direction;
 }
+
+void CProjectile::Death()
+{
+}
+
+void CProjectile::Respawn()
+{
+	setPosition(sf::Vector2f(10000.0f, 10000.0f));
+	SetType(projectileType);
+}
+
