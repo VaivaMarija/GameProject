@@ -63,7 +63,7 @@ void CApplication::Run()
 	CTextureBank::loadAllTextures();
 
 	// Background
-	sf::Sprite backgroundSprite(CTextureBank::backgroud);
+	sf::Sprite backgroundSprite(CTextureBank::backgroudT);
 
 	// Musique
 	sf::Music music;

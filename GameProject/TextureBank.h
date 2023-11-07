@@ -23,7 +23,7 @@ public:
 	static sf::Texture playerHitT;				// texture for when a player hits an enemy/asteroid
 	static sf::Texture enemyHitT;				// texture for when an enemy hits a player
 
-	static sf::Texture backgroud;				// Kasper the friendly swede
+	static sf::Texture backgroudT;				// Kasper the friendly swede
 
 
 
@@ -48,7 +48,7 @@ public:
 		playerHitT.loadFromFile("Content/Textures/Lasers/laserBlue_hit.png");
 		enemyHitT.loadFromFile("Content/Textures/Lasers/laserRed_hit.png");
 
-		backgroud.loadFromFile("Content/Textures/kasperrr.png");
+		backgroudT.loadFromFile("Content/Textures/kasperrr.png");
 	}
 
 private:
