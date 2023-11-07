@@ -16,4 +16,7 @@ sf::Texture CTextureBank::meteorSmallT;
 sf::Texture CTextureBank::meteorMediumT;
 sf::Texture CTextureBank::meteorBigT;
 
+sf::Texture CTextureBank::playerHitT;
+sf::Texture CTextureBank::enemyHitT;
+
 sf::Texture CTextureBank::backgroud;
