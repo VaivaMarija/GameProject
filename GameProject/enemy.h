@@ -29,14 +29,14 @@ public:
     // Decrease the enemy's health when hit by a projectile
     void DecreaseHealth(float damage);
 
+    void Respawn() override;
     void Death() override;
     bool IsDefeated();
 
 
 	void setApplication(CApplication* _application);
 
-private:
-	sf::Texture texture;
+private:	
 	CApplication* application;
 	CWeapon weapon;
 	float TimeUntilShoot;

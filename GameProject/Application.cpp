@@ -216,7 +216,7 @@ void CApplication::Run()
         // Update and render game objects
         for (CGameObject* currentObject : gameObjects)
         {
-            currentObject->Tick(deltaTime);
+            currentObject->DoTick(deltaTime);
             currentObject->drawTo(_window);
         }
 

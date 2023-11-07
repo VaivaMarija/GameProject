@@ -1,6 +1,9 @@
 #include "enemy.h"
 #include "Application.h"
 #include "TextureBank.h"
+#include <chrono>
+#include <thread>
+
 //#include "ProjectilePool.h"
 
 enemy::enemy(CProjectilePool& _projectilePool)
@@ -16,7 +19,7 @@ void enemy::Load()
 }
 
 void enemy::Tick(float _deltaTime)
-{
+{	
 	sf::Vector2f EnemySpeed(0, 10);
 	EnemySpeed *= 10.0f;
 	sf::Vector2f ESpeed = EnemySpeed * _deltaTime;
@@ -58,15 +61,16 @@ bool enemy::IsDefeated()
 	return false;
 }
 
-void enemy::Death() 
+void enemy::Respawn()
 {
-	// Handle enemy death logic here	
-	{
-		setPosition(sf::Vector2f((rand() % 1200) + 100, ((rand() % 64) + 128) * -1));
-	}
-	//damage collision with projectile
-	// 
-	// You can add further logic here, such as playing a death animation, awarding points to the player, or removing the enemy from the game.
+	setPosition(sf::Vector2f((rand() % 1200) + 100, ((rand() % 64) + 128) * -1));
+	setTexture(CTextureBank::enemyT);
+	sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
+}
+
+void enemy::Death()
+{
+	SetKaboom(CTextureBank::playerHitT);	
 }
 
 
